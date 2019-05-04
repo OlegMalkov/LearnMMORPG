@@ -3,9 +3,12 @@ dist
 [include]
 
 [libs]
-
+flowtyped
 [lints]
 
 [options]
 
 [strict]
+
+[version]
+0.98

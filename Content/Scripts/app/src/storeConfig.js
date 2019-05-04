@@ -17,6 +17,7 @@ const storeConfig = {
 			},
 		}),
 	},
+	// $FlowFixMe
 	debug: Boolean(process.env.NODE_ENV !== 'test' || process.env.TRACE),
 }
 
