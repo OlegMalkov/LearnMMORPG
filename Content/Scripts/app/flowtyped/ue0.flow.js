@@ -1,4 +1,4 @@
-declare module "global" {
+declare module 'global' {
   declare function require(name: string): any;
 }
 declare function gc(): void;

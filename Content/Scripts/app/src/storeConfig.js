@@ -1,9 +1,11 @@
 // @flow strict
-import { createEpic, createUpdater, makeSimpleCommand } from './epicsFlow'
+import { createEpic, createUpdater, makeSimpleCommand, type CreateStorePropsType } from './epicsFlow'
+import { createTextActorEpic } from './actors'
+import { actorsEM } from './actorsEM'
 
 const IncEvent = makeSimpleCommand('INC')
 
-const storeConfig = {
+const storeConfig: CreateStorePropsType<*> = {
 	epics: {
 		test: createEpic<number, *, *>({
 			initialState: 2,
@@ -16,6 +18,10 @@ const storeConfig = {
 				}),
 			},
 		}),
+		text: createTextActorEpic({ vcet: 'TEXT', text: 'Hello' }),
+	},
+	effectManagers: {
+		actors: actorsEM,
 	},
 	// $FlowFixMe
 	debug: Boolean(process.env.NODE_ENV !== 'test' || process.env.TRACE),

@@ -74,4 +74,5 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 .DS_Store
 node_modules
-dist
+app.dist.js
+app.dist.js.map

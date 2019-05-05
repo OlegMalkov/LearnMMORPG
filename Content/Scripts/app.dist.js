@@ -312,6 +312,214 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/actors.js":
+/*!***********************!*\
+  !*** ./src/actors.js ***!
+  \***********************/
+/*! exports provided: createTextActorEpic */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTextActorEpic", function() { return createTextActorEpic; });
+/* harmony import */ var _epicsFlow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./epicsFlow */ "./src/epicsFlow.js");
+/* harmony import */ var _actorsEM__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actorsEM */ "./src/actorsEM.js");
+
+
+var SetTextCommand = Object(_epicsFlow__WEBPACK_IMPORTED_MODULE_0__["makeCommand"])('TEXT_ACTOR_SET_TEXT');
+global.SetTextCommand = SetTextCommand;
+
+var createTextActorEpic = function createTextActorEpic(_ref) {
+  var vcet = _ref.vcet,
+      text = _ref.text;
+  return Object(_epicsFlow__WEBPACK_IMPORTED_MODULE_0__["createEpicWithScope"])({
+    vcet: vcet,
+    initialState: {
+      text: text
+    },
+    initialScope: {
+      actor: TextRenderActor
+    },
+    updaters: {
+      init: Object(_epicsFlow__WEBPACK_IMPORTED_MODULE_0__["createUpdater"])({
+        given: {},
+        when: {
+          _: _epicsFlow__WEBPACK_IMPORTED_MODULE_0__["storeCreatedEvent"].condition
+        },
+        then: function then(_ref2) {
+          var R = _ref2.R;
+          return R.sideEffect(Object(_actorsEM__WEBPACK_IMPORTED_MODULE_1__["createTextActorEC"])({
+            actorId: vcet,
+            text: text
+          }));
+        }
+      }),
+      setText: Object(_epicsFlow__WEBPACK_IMPORTED_MODULE_0__["createUpdater"])({
+        given: {},
+        when: {
+          text: SetTextCommand.condition.wsk('text')
+        },
+        then: function then(_ref3) {
+          var R = _ref3.R,
+              text = _ref3.values.text;
+          return R.sideEffect(Object(_actorsEM__WEBPACK_IMPORTED_MODULE_1__["updateTextActorEC"])({
+            actorId: vcet,
+            text: text
+          }));
+        }
+      })
+    }
+  });
+};
+
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./src/actorsEM.js":
+/*!*************************!*\
+  !*** ./src/actorsEM.js ***!
+  \*************************/
+/*! exports provided: createTextActorEC, updateTextActorEC, actorsEM */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTextActorEC", function() { return createTextActorEC; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTextActorEC", function() { return updateTextActorEC; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actorsEM", function() { return actorsEM; });
+/* harmony import */ var _epicsFlow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./epicsFlow */ "./src/epicsFlow.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var requestType = 'actors_effect';
+
+var createTextActorEC = function createTextActorEC(_ref) {
+  var actorId = _ref.actorId,
+      text = _ref.text;
+  return {
+    type: requestType,
+    cmd: 'CREATE_TEXT_ACTOR',
+    actorId: actorId,
+    text: text
+  };
+};
+
+var updateTextActorEC = function updateTextActorEC(_ref2) {
+  var actorId = _ref2.actorId,
+      text = _ref2.text;
+  return {
+    type: requestType,
+    cmd: 'UPDATE_TEXT_ACTOR',
+    actorId: actorId,
+    text: text
+  };
+};
+
+var createTextActor = function createTextActor(_ref3) {
+  var text = _ref3.text;
+  var actor = new TextRenderActor(GWorld, Vector.Vector_Zero(), Rotator.MakeRotator(0, 0, 180));
+  actor.TextRender.SetText(text);
+  return actor;
+};
+
+var actorsEM = Object(_epicsFlow__WEBPACK_IMPORTED_MODULE_0__["createEffectManager"])({
+  requestType: requestType,
+  initialState: {
+    actorsStatesById: {}
+  },
+  initialScope: {
+    actorsById: {}
+  },
+  onEffectRequest: function onEffectRequest(_ref4) {
+    var effect = _ref4.effect,
+        requesterEpicVcet = _ref4.requesterEpicVcet,
+        state = _ref4.state,
+        scope = _ref4.scope,
+        R = _ref4.R;
+
+    var makeActorId = function makeActorId(actorId) {
+      return "".concat(requesterEpicVcet, "_").concat(actorId);
+    };
+
+    switch (effect.cmd) {
+      case 'CREATE_TEXT_ACTOR':
+        {
+          var actorId = effect.actorId,
+              text = effect.text;
+          var id = makeActorId(actorId);
+          var actor = createTextActor({
+            text: text
+          });
+          scope.actorsById[id] = actor;
+          return R.mapState(function () {
+            return _objectSpread({}, state, {
+              actorsStatesById: _objectSpread({}, state.actorsStatesById, _defineProperty({}, id, {
+                text: text
+              }))
+            });
+          });
+        }
+
+      case 'UPDATE_TEXT_ACTOR':
+        {
+          var _actorId = effect.actorId,
+              _text = effect.text;
+
+          var _id = makeActorId(_actorId);
+
+          var _actor = scope.actorsById[_id];
+          console.log('actor id', Object.keys(scope.actorsById).length);
+
+          if (_actor instanceof TextRenderActor) {
+            _actor.TextRender.SetText(_text);
+
+            return R.mapState(function () {
+              return _objectSpread({}, state, {
+                actorsStatesById: _objectSpread({}, state.actorsStatesById, _defineProperty({}, _id, {
+                  text: _text === undefined ? state.actorsStatesById[_id].text : _text
+                }))
+              });
+            });
+          } else {
+            throw new Error('Can not update text of actor because it is not TextRenderActor');
+          }
+        }
+
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        effect;
+    }
+
+    return R.doNothing;
+  },
+  destroyEffects: function destroyEffects(_ref5) {
+    var scope = _ref5.scope;
+    Object.keys(scope.actorsById).forEach(function (actorId) {
+      return scope.actorsById[actorId].K2_DestroyActor();
+    });
+    scope.actorsById = {};
+    console.log('effects destroyed2', Object.keys(scope.actorsById).length);
+  },
+  recreateEffects: function recreateEffects(_ref6) {
+    var state = _ref6.state,
+        scope = _ref6.scope;
+    console.log('recre state.actorsStatesById', Object.keys(state.actorsStatesById));
+    Object.keys(state.actorsStatesById).forEach(function (actorId) {
+      scope.actorsById[actorId] = createTextActor({
+        text: state.actorsStatesById[actorId].text
+      });
+    });
+    console.log('effects recreated', Object.keys(scope.actorsById).length);
+  }
+});
+
+
+/***/ }),
+
 /***/ "./src/epicsFlow.js":
 /*!**************************!*\
   !*** ./src/epicsFlow.js ***!
@@ -378,7 +586,8 @@ var toTrueV = function toTrueV() {
 
 var extractConditionV = function extractConditionV(c) {
   return c.value;
-};
+}; // $FlowFixMe
+
 
 var __DEV__ = process.env !== 'production';
 
@@ -594,12 +803,16 @@ function createEffectManager(_ref2) {
   var initialState = _ref2.initialState,
       initialScope = _ref2.initialScope,
       onEffectRequest = _ref2.onEffectRequest,
-      requestType = _ref2.requestType;
+      requestType = _ref2.requestType,
+      destroyEffects = _ref2.destroyEffects,
+      recreateEffects = _ref2.recreateEffects;
   return {
     requestType: requestType,
     initialState: initialState,
     initialScope: initialScope,
     onEffectRequest: onEffectRequest,
+    destroyEffects: destroyEffects,
+    recreateEffects: recreateEffects,
     _effect: null
   };
 }
@@ -983,14 +1196,8 @@ var findChangedConditions = function findChangedConditions(condition, value, cha
 
 var nothingChangedButObjectRecreatedWarn = 'WARN: nothing changed, but new objects with same data was created';
 
-var createExecuteMsg = function createExecuteMsg(_ref6) {
-  var trace = _ref6.trace,
-      epicsMapByVcet = _ref6.epicsMapByVcet,
-      epicKeyByVcet = _ref6.epicKeyByVcet,
-      effectManagers = _ref6.effectManagers,
-      dispatch = _ref6.dispatch,
-      rootConditionsByMsgType = _ref6.rootConditionsByMsgType;
-  var effectManagersByRequestType = Object.keys(effectManagers).reduce(function (m, emk) {
+var createEffectManagersByRequestType = function createEffectManagersByRequestType(effectManagers) {
+  return Object.keys(effectManagers).reduce(function (m, emk) {
     var effectManager = _objectSpread({}, effectManagers[emk]);
 
     effectManager.key = emk;
@@ -1003,6 +1210,16 @@ var createExecuteMsg = function createExecuteMsg(_ref6) {
 
     return m;
   }, {});
+};
+
+var createExecuteMsg = function createExecuteMsg(_ref6) {
+  var trace = _ref6.trace,
+      epicsMapByVcet = _ref6.epicsMapByVcet,
+      epicKeyByVcet = _ref6.epicKeyByVcet,
+      effectManagers = _ref6.effectManagers,
+      dispatch = _ref6.dispatch,
+      rootConditionsByMsgType = _ref6.rootConditionsByMsgType;
+  var effectManagersByRequestType = createEffectManagersByRequestType(effectManagers);
   var orderOfEpicsVcet = Object.keys(epicsMapByVcet).reduce(function (r, vcet, index) {
     return _objectSpread({}, r, _defineProperty({}, vcet, index));
   }, {});
@@ -1961,7 +2178,7 @@ function createEpicsSubStoresByVcet(epics) {
   }, {});
 }
 
-function createStore(_ref19) {
+function createStore(_ref19, hotReload) {
   var epics = _ref19.epics,
       _ref19$effectManagers = _ref19.effectManagers,
       effectManagers = _ref19$effectManagers === void 0 ? {} : _ref19$effectManagers,
@@ -2300,12 +2517,28 @@ function createStore(_ref19) {
     devTools.init(serviceState);
   }
 
-  if (!isSubStore) {
+  if (!isSubStore && !hotReload) {
     _dispatch(storeCreatedEvent.create());
   }
 
   var storeReplacement;
   var initialState = serviceState;
+
+  var doForEachEffectManager = function doForEachEffectManager(fn) {
+    var effectManagersByRequestType = createEffectManagersByRequestType(effectManagers);
+    Object.keys(effectManagersByRequestType).forEach(function (effectRequestType) {
+      var effectManager = effectManagersByRequestType[effectRequestType];
+      var _serviceState$effectM = serviceState.effectManagers[effectRequestType],
+          state = _serviceState$effectM.state,
+          scope = _serviceState$effectM.scope;
+      fn({
+        effectManager: effectManager,
+        state: state,
+        scope: scope
+      });
+    });
+  };
+
   return {
     _getServiceState: function _getServiceState() {
       if (storeReplacement) return storeReplacement._getServiceState();
@@ -2354,19 +2587,35 @@ function createStore(_ref19) {
       if (storeReplacement) {
         storeReplacement.destroyEffects();
       } else {
-        console.log('destroing effects');
+        doForEachEffectManager(function (_ref24) {
+          var effectManager = _ref24.effectManager,
+              state = _ref24.state,
+              scope = _ref24.scope;
+          effectManager.destroyEffects({
+            state: state,
+            scope: scope
+          });
+        });
       }
     },
     recreateEffects: function recreateEffects() {
       if (storeReplacement) {
         storeReplacement.recreateEffects();
       } else {
-        console.log('recreating effects');
+        doForEachEffectManager(function (_ref25) {
+          var effectManager = _ref25.effectManager,
+              state = _ref25.state,
+              scope = _ref25.scope;
+          effectManager.recreateEffects({
+            state: state,
+            scope: scope
+          });
+        });
       }
     },
     replaceConfig: function replaceConfig(creaceEpicsStoreConfig) {
       var currentState = storeReplacement ? storeReplacement._getServiceState() : serviceState;
-      storeReplacement = createStore(creaceEpicsStoreConfig);
+      storeReplacement = createStore(creaceEpicsStoreConfig, true);
 
       storeReplacement._setState(currentState);
 
@@ -2504,6 +2753,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncEvent", function() { return IncEvent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "storeConfig", function() { return storeConfig; });
 /* harmony import */ var _epicsFlow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./epicsFlow */ "./src/epicsFlow.js");
+/* harmony import */ var _actors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actors */ "./src/actors.js");
+/* harmony import */ var _actorsEM__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actorsEM */ "./src/actorsEM.js");
+
+
 
 var IncEvent = Object(_epicsFlow__WEBPACK_IMPORTED_MODULE_0__["makeSimpleCommand"])('INC');
 var storeConfig = {
@@ -2525,8 +2778,16 @@ var storeConfig = {
           }
         })
       }
+    }),
+    text: Object(_actors__WEBPACK_IMPORTED_MODULE_1__["createTextActorEpic"])({
+      vcet: 'TEXT',
+      text: 'Hello'
     })
   },
+  effectManagers: {
+    actors: _actorsEM__WEBPACK_IMPORTED_MODULE_2__["actorsEM"]
+  },
+  // $FlowFixMe
   debug: Boolean( true || false)
 };
 
@@ -2534,7 +2795,6 @@ var storeConfig = {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.dist.js.map
 (function (global) {
 	"use strict"
   

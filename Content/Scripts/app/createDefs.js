@@ -25,6 +25,7 @@ String.prototype.process = function() {
 	r = beautify(r)
 
 	r = r.replace('  RenameAsset(Asset: UObject, NewName: string): void;', '')
+	r = r.replace('declare module "global"', 'declare module \'global\'')
 
 	return r
 }

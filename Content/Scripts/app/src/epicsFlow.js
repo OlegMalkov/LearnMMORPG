@@ -119,6 +119,9 @@ type CreateEpicPropsType<S, E, PC> = {|
 |}
 
 type OnEffectRequestType<S, SC, E> = ({| dispatch: DispatchType, effect: $ReadOnly<E>, requesterEpicVcet: string, scope: SC, state: $ReadOnly<S>, R: EffectManagerResultType<S> |}) => EffectManagerResultType<S>
+
+type EMDRFnType<S, SC> = ({ state: S, scope: SC }) => void
+
 opaque type EffectManager<S, SC, E> = {|
 	_effect: E,
 	initialScope?: SC,
@@ -126,6 +129,8 @@ opaque type EffectManager<S, SC, E> = {|
 	key?: string,
 	onEffectRequest: OnEffectRequestType<S, SC, E>,
 	requestType: string,
+	destroyEffects: EMDRFnType<S, SC>,
+	recreateEffects: EMDRFnType<S, SC>,
 |}
 type PendingEffectType<E> = {| effect: E, promise: Promise<any> |}
 type EffectManagerStateType<S, E> = {|
@@ -141,6 +146,8 @@ type CreateEffectManagerPropsType<E, S, SC> = {|
 	initialState?: S,
 	onEffectRequest: OnEffectRequestType<S, SC, E>,
 	requestType: string,
+	destroyEffects: EMDRFnType<S, SC>,
+	recreateEffects: EMDRFnType<S, SC>,
 |}
 type CreateEffectManagerType = <E, S, SC>(CreateEffectManagerPropsType<E, S, SC>) => EffectManager<S, SC, E>
 type PluginPropsType = {|
@@ -419,12 +426,16 @@ function createEffectManager<E, S, SC>({
 	initialScope,
 	onEffectRequest,
 	requestType,
+	destroyEffects,
+	recreateEffects,
 }: CreateEffectManagerPropsType<E, S, SC>): EffectManager<S, SC, E> {
 	return {
 		requestType,
 		initialState,
 		initialScope,
 		onEffectRequest,
+		destroyEffects,
+		recreateEffects,
 		_effect: (null: any),
 	}
 }
@@ -739,6 +750,17 @@ const findChangedConditions = (condition, value: Object, changedConditions, cond
 	})
 }
 const nothingChangedButObjectRecreatedWarn = 'WARN: nothing changed, but new objects with same data was created'
+const createEffectManagersByRequestType = (effectManagers): { [string]: EffectManager<*, *, *> } => Object.keys(effectManagers).reduce((m, emk) => {
+	const effectManager = { ...effectManagers[emk] }
+
+	effectManager.key = emk
+	if (!m[effectManager.requestType]) {
+		m[effectManager.requestType] = effectManager
+	} else {
+		throw new Error(`duplicate effect manager request type ${effectManagers[emk].requestType} for [${emk} and ${m[effectManager.requestType].key}]`)
+	}
+	return m
+}, {})
 const createExecuteMsg = ({
 	trace,
 	epicsMapByVcet,epicKeyByVcet,
@@ -746,17 +768,7 @@ const createExecuteMsg = ({
 	dispatch,
 	rootConditionsByMsgType,
 }: CreateExecuteMsgPropsType) => {
-	const effectManagersByRequestType: { [string]: EffectManager<*, *, *> } = Object.keys(effectManagers).reduce((m, emk) => {
-		const effectManager = { ...effectManagers[emk] }
-
-		effectManager.key = emk
-		if (!m[effectManager.requestType]) {
-			m[effectManager.requestType] = effectManager
-		} else {
-			throw new Error(`duplicate effect manager request type ${effectManagers[emk].requestType} for [${emk} and ${m[effectManager.requestType].key}]`)
-		}
-		return m
-	}, {})
+	const effectManagersByRequestType = createEffectManagersByRequestType(effectManagers)
 	const orderOfEpicsVcet = Object.keys(epicsMapByVcet).reduce((r, vcet, index) => ({ ...r, [vcet]: index }), {})
 	const vcetToSortValue = (vcet, currentMsgType, initiatedByEpic) => {
 		if (vcet === currentMsgType || (initiatedByEpic && initiatedByEpic.type === vcet)) return -Infinity
@@ -1582,7 +1594,7 @@ function createStore<Epics: { [string]: EpicType<*, *, *, *> }> ({
 	plugins = {},
 	debug,
 	isSubStore,
-}: CreateStorePropsType<Epics>): EpicsStoreType<Epics> {
+}: CreateStorePropsType<Epics>, hotReload?: true): EpicsStoreType<Epics> {
 	// eslint-disable-next-line no-console
 	const { warn = (() => null: Function), trace, devTools: devToolsConfig } = debug === true ? { devTools: { config: { } }, warn: undefined, trace: e => console.log(traceToString(e))} : (debug || {})
 
@@ -1842,13 +1854,24 @@ function createStore<Epics: { [string]: EpicType<*, *, *, *> }> ({
 		})
 		devTools.init(serviceState)
 	}
-	if (!isSubStore) {
+	if (!isSubStore && !hotReload) {
 		dispatch(storeCreatedEvent.create())
 	}
 
 	let storeReplacement
 
 	const initialState = serviceState
+
+	const doForEachEffectManager = (fn: ({ effectManager: EffectManager<*, *, *>, state: any, scope: any }) => void) => {
+		const effectManagersByRequestType = createEffectManagersByRequestType(effectManagers)
+
+		Object.keys(effectManagersByRequestType).forEach(effectRequestType => {
+			const effectManager: EffectManager<*, *, *> = effectManagersByRequestType[effectRequestType]
+			const { state, scope } = serviceState.effectManagers[effectRequestType]
+
+			fn({ effectManager, state, scope })
+		})
+	}
 
 	return {
 		_getServiceState: () => {
@@ -1899,20 +1922,24 @@ function createStore<Epics: { [string]: EpicType<*, *, *, *> }> ({
 			if (storeReplacement) {
 				storeReplacement.destroyEffects()
 			} else {
-				console.log('destroing effects')
+				doForEachEffectManager(({ effectManager, state, scope }) => {
+					effectManager.destroyEffects({ state, scope })
+				})
 			}
 		},
 		recreateEffects: () => {
 			if (storeReplacement) {
 				storeReplacement.recreateEffects()
 			} else {
-				console.log('recreating effects')
+				doForEachEffectManager(({ effectManager, state, scope }) => {
+					effectManager.recreateEffects({ state, scope })
+				})
 			}
 		},
 		replaceConfig: (creaceEpicsStoreConfig) => {
 			const currentState: any = storeReplacement ? storeReplacement._getServiceState() : serviceState
 
-			storeReplacement = createStore(creaceEpicsStoreConfig)
+			storeReplacement = createStore(creaceEpicsStoreConfig, true)
 			storeReplacement._setState(currentState)
 			stateChangedSubscribers.forEach(sub => storeReplacement.subscribeOnStateChange(sub))
 			outMsgSubscribers.forEach(sub => storeReplacement.subscribeOutMsg(sub))
@@ -1998,6 +2025,7 @@ const makeCommand = makeMsg
 const storeCreatedEvent = makeSimpleEvent('@STORE_CREATED')
 
 export type { // eslint-disable-line import/group-exports
+	CreateStorePropsType,
 	Condition,
 	BuiltInEffectType,
 	CreateEffectManagerType,

@@ -91,7 +91,9 @@ module.exports = {
         "yoda": "error",
         "keyword-spacing": "error",
         "space-before-blocks": "error",
-        "no-param-reassign": 2
+        "no-param-reassign": 2,
+        "no-undef": 0,
+        "flowtype/no-types-missing-file-annotation": 0
     },
 
     "settings": {

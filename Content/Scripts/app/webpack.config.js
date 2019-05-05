@@ -46,7 +46,7 @@ module.exports = {
 		path: path.resolve(__dirname, '..'),
 	},
 	mode: 'development',
-	devtool: 'source-map',
+	devtool: 'none',
 	externals: {
 		devrequire: 'commonjs devrequire',
 		bootstrap: 'commonjs bootstrap',
