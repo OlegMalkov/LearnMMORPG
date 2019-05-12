@@ -234,10 +234,13 @@ type EpicSubsType = { [epicVcet: string]: { [updaterKey: string]: Array<string> 
 
 opaque type EpicsStoreType<Epics: Object>: {
 	dispatch: DispatchType,
+	_getServiceState: () => { conditions: ConditionsValuesType, effectManagers: EffectManagersStateType<*, *>, epics: EpicsStateType },
+	_setState: ServiceStateType => void,
 	destroyEffects: () => void,
 	recreateEffects: () => void,
 	getAllPendingEffectsPromises: () => PendingEffectPromisesType,
 	getState: () => $Exact<$ObjMap<Epics, typeof getInitialState>>,
+	subscribeOnDispatch: (AnyMsgType => any) => () => void,
 	subscribeOutMsg: any => any,
 	subscribeOnStateChange: (sub: ($Exact<$ObjMap<Epics, typeof getInitialState>>) => any) => any,
 	replaceConfig: (CreateStorePropsType<Epics>) => void,
@@ -255,6 +258,7 @@ opaque type EpicsStoreType<Epics: Object>: {
 	getAllPendingEffectsPromises: () => PendingEffectPromisesType,
 	getState: () => $Exact<$ObjMap<Epics, typeof getInitialState>>,
 	subscribeOutMsg: any => any,
+	subscribeOnDispatch: (AnyMsgType => any) => () => void,
 	subscribeOnStateChange: (sub: ($Exact<$ObjMap<Epics, typeof getInitialState>>) => any) => any,
 	warn: Function,
 |}
@@ -392,6 +396,17 @@ function createUpdater<S: AnyValueType, SC: Object, DO: { [string]: { messageTyp
 		conditionsKeys: Object.keys((conditions: any)),
 		compulsoryConditionsKeys,
 	}
+}
+
+function createSimpleUpdater<S: AnyValueType, SC: Object, V: *, E> (
+	condition: V,
+	then: ({| R: ReducerResult<S, SC, E>, value: $Call<typeof extractConditionV, V>, scope: SC, sourceMsg: AnyMsgType, state: S |}) => ReducerResult<S, SC, E>
+): UpdaterType<S, SC, any, E> {
+	return createUpdater({
+		given: {},
+		when: { value: condition },
+		then: ({ values, state, scope, R, sourceMsg }) => then({ value: values.value, state, scope, R, sourceMsg }),
+	})
 }
 
 class EffectManagerResultType<S> {
@@ -1159,7 +1174,7 @@ const createExecuteMsg = ({
 							requesterEpicVcet: subVcet,
 							state,
 							scope: effectManagerState.scope,
-							dispatch,
+							dispatch: (m) => setTimeout(() => dispatch(m), 0),
 							R: new EffectManagerResultType(state),
 						})
 
@@ -1611,7 +1626,9 @@ function createStore<Epics: { [string]: EpicType<*, *, *, *> }> ({
 
 	let epicsStateChangedCallbackAfterBatchDispatchComplete: () => void = () => undefined
 
-	function dispatch(msg: { type: any }, meta?: MetaType = ({}: any)) {
+	function dispatch(msg: AnyMsgType, meta?: MetaType = ({}: any)) {
+		onDispatchSubscribers.forEach(sub => sub(msg))
+
 		const messagesToSendOutside = []
 		const epicsStateUpdate = {}
 		const effectManagersStateUpdate = {}
@@ -1841,6 +1858,7 @@ function createStore<Epics: { [string]: EpicType<*, *, *, *> }> ({
 			return pendingEffectsPromises
 		}, [])
 	}
+	let onDispatchSubscribers = []
 	const stateChangedSubscribers = []
 	const outMsgSubscribers = []
 
@@ -1972,6 +1990,13 @@ function createStore<Epics: { [string]: EpicType<*, *, *, *> }> ({
 			}
 			stateChangedSubscribers.push(subscriber)
 		},
+		subscribeOnDispatch: subscriber => {
+			if (storeReplacement) {
+				storeReplacement.subscribeOnDispatch(subscriber)
+			}
+			onDispatchSubscribers.push(subscriber)
+			return () => { onDispatchSubscribers = onDispatchSubscribers.filter(sub => sub !== subscriber) }
+		},
 		// subscribe to messages that can be send from epics to 3rd party
 		subscribeOutMsg: sub => {
 			if (storeReplacement) {
@@ -2057,6 +2082,7 @@ export { // eslint-disable-line import/group-exports
 	createCondition,
 	createEpicCondition,
 	createUpdater,
+	createSimpleUpdater,
 	createEffectManager,
 	deepCopy,
 	deepEqual,

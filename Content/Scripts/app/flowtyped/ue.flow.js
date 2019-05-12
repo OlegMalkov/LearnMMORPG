@@ -15445,30 +15445,30 @@ declare class JavascriptAutomatedTestInstance {
   AddWarning(InWarning: string): void;
   ClearExecutionInfo(): void;
   Destroy(): {
-    Test: JavascriptAutomatedTestInstance
+    test: JavascriptAutomatedTestInstance
   };
   SetContinue(bInContinue: boolean): void;
   static AddAnalyticsItem(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     InAnalyticsItem: string
   ): void;
-  static AddError(Test: JavascriptAutomatedTestInstance, InError: string): void;
+  static AddError(test: JavascriptAutomatedTestInstance, InError: string): void;
   static AddLogItem(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     InLogItem: string
   ): void;
   static AddWarning(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     InWarning: string
   ): void;
-  static ClearExecutionInfo(Test: JavascriptAutomatedTestInstance): void;
+  static ClearExecutionInfo(test: JavascriptAutomatedTestInstance): void;
   static Destroy(
-    Test?: JavascriptAutomatedTestInstance
+    test?: JavascriptAutomatedTestInstance
   ): {
-    Test: JavascriptAutomatedTestInstance
+    test: JavascriptAutomatedTestInstance
   };
   static SetContinue(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     bInContinue: boolean
   ): void;
 }
@@ -15482,7 +15482,7 @@ declare class JavascriptAutomatedTest {
   clone(): JavascriptAutomatedTest;
   static C(Other: UObject | any): JavascriptAutomatedTest;
   Create(): JavascriptAutomatedTestInstance;
-  static Create(Test: JavascriptAutomatedTest): JavascriptAutomatedTestInstance;
+  static Create(test: JavascriptAutomatedTest): JavascriptAutomatedTestInstance;
 }
 declare class JavascriptTestLibrary mixins BlueprintFunctionLibrary {
   static Load(ResourceName: string): JavascriptTestLibrary;
@@ -15495,7 +15495,7 @@ declare class JavascriptTestLibrary mixins BlueprintFunctionLibrary {
     Abstract?: boolean
   ): JavascriptTestLibrary;
   static SetContinue(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     bInContinue: boolean
   ): void;
   static PushFrameCounter(): void;
@@ -15505,24 +15505,24 @@ declare class JavascriptTestLibrary mixins BlueprintFunctionLibrary {
   static DestroyWorld(World: World): void;
   static DestroyUObject(UObject: UObject): void;
   static Destroy(
-    Test?: JavascriptAutomatedTestInstance
+    test?: JavascriptAutomatedTestInstance
   ): {
-    Test: JavascriptAutomatedTestInstance
+    test: JavascriptAutomatedTestInstance
   };
-  static Create(Test: JavascriptAutomatedTest): JavascriptAutomatedTestInstance;
-  static ClearExecutionInfo(Test: JavascriptAutomatedTestInstance): void;
+  static Create(test: JavascriptAutomatedTest): JavascriptAutomatedTestInstance;
+  static ClearExecutionInfo(test: JavascriptAutomatedTestInstance): void;
   static BeginPlay(World: World): void;
   static AddWarning(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     InWarning: string
   ): void;
   static AddLogItem(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     InLogItem: string
   ): void;
-  static AddError(Test: JavascriptAutomatedTestInstance, InError: string): void;
+  static AddError(test: JavascriptAutomatedTestInstance, InError: string): void;
   static AddAnalyticsItem(
-    Test: JavascriptAutomatedTestInstance,
+    test: JavascriptAutomatedTestInstance,
     InAnalyticsItem: string
   ): void;
   static C(Other: UObject | any): JavascriptTestLibrary;
@@ -17032,6 +17032,54 @@ declare class JavascriptHttpRequest mixins UObject {
   GetContentAsString(): string;
   CancelRequest(): void;
   static C(Other: UObject | any): JavascriptHttpRequest;
+}
+declare class WebBrowserTexture mixins Texture {
+  static Load(ResourceName: string): WebBrowserTexture;
+  static Find(Outer: UObject, ResourceName: string): WebBrowserTexture;
+  static GetDefaultObject(): WebBrowserTexture;
+  static CreateDefaultSubobject(
+    Name: string,
+    Transient?: boolean,
+    Required?: boolean,
+    Abstract?: boolean
+  ): WebBrowserTexture;
+  static C(Other: UObject | any): WebBrowserTexture;
+}
+declare class WebBrowser mixins Widget {
+  OnUrlChanged: UnrealEngineMulticastDelegate<(text: string) => void>;
+  OnBeforePopup: UnrealEngineMulticastDelegate<
+    (URL: string, Frame: string) => void
+  >;
+  InitialURL: string;
+  bSupportsTransparency: boolean;
+  static Load(ResourceName: string): WebBrowser;
+  static Find(Outer: UObject, ResourceName: string): WebBrowser;
+  static GetDefaultObject(): WebBrowser;
+  static CreateDefaultSubobject(
+    Name: string,
+    Transient?: boolean,
+    Required?: boolean,
+    Abstract?: boolean
+  ): WebBrowser;
+  LoadURL(NewURL: string): void;
+  LoadString(Contents: string, DummyURL: string): void;
+  GetUrl(): string;
+  GetTitleText(): string;
+  ExecuteJavascript(ScriptText: string): void;
+  static C(Other: UObject | any): WebBrowser;
+}
+declare class WebBrowserAssetManager mixins UObject {
+  DefaultMaterial: Material;
+  static Load(ResourceName: string): WebBrowserAssetManager;
+  static Find(Outer: UObject, ResourceName: string): WebBrowserAssetManager;
+  static GetDefaultObject(): WebBrowserAssetManager;
+  static CreateDefaultSubobject(
+    Name: string,
+    Transient?: boolean,
+    Required?: boolean,
+    Abstract?: boolean
+  ): WebBrowserAssetManager;
+  static C(Other: UObject | any): WebBrowserAssetManager;
 }
 declare class TireConfigMaterialFriction {
   PhysicalMaterial: PhysicalMaterial;

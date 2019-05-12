@@ -2,6 +2,7 @@
 
 import { createStore } from './epicsFlow'
 import { storeConfig } from './storeConfig'
+import './utils'
 
 // eslint-disable-next-line no-undef
 global.$appSetup = (ctx) => {

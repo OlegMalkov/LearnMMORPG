@@ -50,6 +50,9 @@ module.exports = {
 	externals: {
 		devrequire: 'commonjs devrequire',
 		bootstrap: 'commonjs bootstrap',
+		UMG: 'commonjs UMG',
+		uclass: 'commonjs uclass',
+		instantiator: 'commonjs instantiator',
 	},
 	plugins: [
 		new PostCompile(({ compilation }) => {

@@ -1,7 +1,21 @@
 // @flow strict
-import { createEpic, createUpdater, makeSimpleCommand, type CreateStorePropsType } from './epicsFlow'
-import { createTextActorEpic } from './actors'
-import { actorsEM } from './actorsEM'
+import {
+	createEpic,
+	createUpdater,
+	makeSimpleCommand,
+	type CreateStorePropsType,
+	storeCreatedEvent,
+	createSimpleUpdater,
+} from './epicsFlow'
+import {
+	actorsEM,
+	queryWorldActorsEC,
+	createTextActorEC,
+	WorldActorsEvent,
+	updateTextActorEC,
+	bootBrowserEC,
+} from './actorsEM'
+import { browserStoreGlobalRegistryId } from './browser'
 
 const IncEvent = makeSimpleCommand('INC')
 
@@ -11,14 +25,22 @@ const storeConfig: CreateStorePropsType<*> = {
 			initialState: 2,
 			vcet: 'TEST',
 			updaters: {
-				inc: createUpdater({
+				storeCreated: createUpdater({
 					given: {},
-					when: { inc: IncEvent.condition },
-					then: ({R}) => R.mapState(i => i + 1),
+					when: { inc: storeCreatedEvent.condition },
+					then: ({R}) => R
+						.sideEffect(bootBrowserEC(browserStoreGlobalRegistryId))
+						.sideEffect(queryWorldActorsEC())
+						.sideEffect(createTextActorEC({ actorId: 'text1', text: 'initialized' })),
 				}),
+				worldActors: createSimpleUpdater(
+					WorldActorsEvent.condition,
+					({ R, value }) => R
+						.sideEffect(updateTextActorEC({ actorId: 'text1', text: `Actors: ${value.actors.map(a => a.GetName()).join(',')}` }))
+				),
+
 			},
 		}),
-		text: createTextActorEpic({ vcet: 'TEXT', text: 'Hello' }),
 	},
 	effectManagers: {
 		actors: actorsEM,
