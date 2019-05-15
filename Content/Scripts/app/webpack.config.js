@@ -53,10 +53,15 @@ module.exports = {
 		UMG: 'commonjs UMG',
 		uclass: 'commonjs uclass',
 		instantiator: 'commonjs instantiator',
+		fs: 'commonjs fs',
 	},
 	plugins: [
 		new PostCompile(({ compilation }) => {
-			fs.appendFileSync(path.resolve(compilation.outputOptions.path, compilation.outputOptions.filename), hotReloadCode)
+			const pathToBundle = path.resolve(compilation.outputOptions.path, compilation.outputOptions.filename)
+
+			if (fs.readFileSync(pathToBundle).indexOf('require(\'bootstrap\')(\'app.dist.js\')') === -1) {
+				fs.appendFileSync(pathToBundle, hotReloadCode)
+			}
 		}),
 	],
 }

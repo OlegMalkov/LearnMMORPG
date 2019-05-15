@@ -15,7 +15,7 @@ import {
 	updateTextActorEC,
 	bootBrowserEC,
 } from './actorsEM'
-import { browserStoreGlobalRegistryId } from './browser'
+import './browser/browser'
 
 const IncEvent = makeSimpleCommand('INC')
 
@@ -29,7 +29,7 @@ const storeConfig: CreateStorePropsType<*> = {
 					given: {},
 					when: { inc: storeCreatedEvent.condition },
 					then: ({R}) => R
-						.sideEffect(bootBrowserEC(browserStoreGlobalRegistryId))
+						.sideEffect(bootBrowserEC('./app/src/browser/browser.dist.js'))
 						.sideEffect(queryWorldActorsEC())
 						.sideEffect(createTextActorEC({ actorId: 'text1', text: 'initialized' })),
 				}),

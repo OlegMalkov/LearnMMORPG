@@ -3,7 +3,7 @@
 const toTrueV = (): true => true
 const extractConditionV =<V>(c: { value: V }): V => c.value
 
-const __DEV__ = process.env !== 'production'
+const __DEV__ = (process: any).env !== 'production'
 
 type AnyValueType = number | string | bool | Object | Array<AnyValueType> | null
 type CompulsoryConditionFieldsType = {|
@@ -67,6 +67,7 @@ type CreateConditionPropsType = {|
 	selector?: AnyValueType => AnyValueType,
 	selectorKey?: string,
 |}
+// $FlowFixMe
 type AnyMsgType = { type: $Subtype<string> } // eslint-disable-line flowtype/require-exact-type
 type MetaType = {| targetEpicVcet?: string[] |}
 type DispatchType = (AnyMsgType, meta?: MetaType) => void

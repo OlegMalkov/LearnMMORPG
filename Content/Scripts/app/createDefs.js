@@ -27,6 +27,10 @@ String.prototype.process = function() {
 	r = r.replace('  RenameAsset(Asset: UObject, NewName: string): void;', '')
 	r = r.replace('declare module "global"', 'declare module \'global\'')
 
+	while (r.indexOf('UnrealEngineClassT<any>') !== -1) {
+		r = r.replace('UnrealEngineClassT<any>', 'UnrealEngineClassT')
+	}
+
 	return r
 }
 

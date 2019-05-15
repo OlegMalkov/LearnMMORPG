@@ -121,7 +121,7 @@ declare class Viewport mixins ContentWidget {
     Required?: boolean,
     Abstract?: boolean
   ): Viewport;
-  Spawn(ActorClass: UnrealEngineClassT<any>): Actor;
+  Spawn(ActorClass: UnrealEngineClassT): Actor;
   SetViewRotation(Rotation: Rotator): void;
   SetViewLocation(Location: Vector): void;
   GetViewRotation(): Rotator;
@@ -416,7 +416,7 @@ declare class WidgetBlueprintLibrary mixins BlueprintFunctionLibrary {
   static GetAllWidgetsWithInterface(
     WorldContextObject: UObject,
     FoundWidgets?: UserWidget[],
-    Interface?: UnrealEngineClassT<any>,
+    Interface?: UnrealEngineClassT,
     TopLevelOnly?: boolean
   ): {
     FoundWidgets: UserWidget[]
@@ -424,7 +424,7 @@ declare class WidgetBlueprintLibrary mixins BlueprintFunctionLibrary {
   static GetAllWidgetsOfClass(
     WorldContextObject: UObject,
     FoundWidgets?: UserWidget[],
-    WidgetClass?: UnrealEngineClassT<any>,
+    WidgetClass?: UnrealEngineClassT,
     TopLevelOnly?: boolean
   ): {
     FoundWidgets: UserWidget[]
@@ -497,11 +497,11 @@ declare class WidgetBlueprintLibrary mixins BlueprintFunctionLibrary {
     $: EventReply
   };
   static CreateDragDropOperation(
-    OperationClass: UnrealEngineClassT<any>
+    OperationClass: UnrealEngineClassT
   ): DragDropOperation;
   static Create(
     WorldContextObject: UObject,
-    WidgetType: UnrealEngineClassT<any>,
+    WidgetType: UnrealEngineClassT,
     OwningPlayer: PlayerController
   ): UserWidget;
   static ClearUserFocus(
@@ -567,7 +567,7 @@ declare var EWidgetGeometryMode: {
 declare class WidgetComponent mixins MeshComponent {
   Space: EWidgetSpaceT;
   TimingPolicy: EWidgetTimingPolicyT;
-  WidgetClass: UnrealEngineClassT<any>;
+  WidgetClass: UnrealEngineClassT;
   DrawSize: IntPoint;
   bManuallyRedraw: boolean;
   bRedrawRequested: boolean;
@@ -1502,7 +1502,7 @@ declare class CaptureResolution {
 }
 declare class MovieSceneCaptureSettings {
   OutputDirectory: DirectoryPath;
-  GameModeOverride: UnrealEngineClassT<any>;
+  GameModeOverride: UnrealEngineClassT;
   OutputFormat: string;
   bOverwriteExisting: boolean;
   bUseRelativeFrameNumbers: boolean;
@@ -1542,8 +1542,8 @@ declare class MovieSceneCapture mixins UObject {
     Required?: boolean,
     Abstract?: boolean
   ): MovieSceneCapture;
-  SetImageCaptureProtocolType(ProtocolType: UnrealEngineClassT<any>): void;
-  SetAudioCaptureProtocolType(ProtocolType: UnrealEngineClassT<any>): void;
+  SetImageCaptureProtocolType(ProtocolType: UnrealEngineClassT): void;
+  SetAudioCaptureProtocolType(ProtocolType: UnrealEngineClassT): void;
   GetImageCaptureProtocol(): MovieSceneCaptureProtocolBase;
   GetAudioCaptureProtocol(): MovieSceneCaptureProtocolBase;
   static C(Other: UObject | any): MovieSceneCapture;
@@ -2192,7 +2192,7 @@ declare class PreviewMeshCollection mixins DataAsset {
   static C(Other: UObject | any): PreviewMeshCollection;
 }
 declare class PersonaPreviewSceneDescription mixins UObject {
-  PreviewController: UnrealEngineClassT<any>;
+  PreviewController: UnrealEngineClassT;
   PreviewControllerInstance: PersonaPreviewSceneController;
   PreviewControllerInstances: PersonaPreviewSceneController[];
   PreviewMesh: SkeletalMesh;
@@ -2391,7 +2391,7 @@ declare class ViewportDragOperation mixins UObject {
 }
 declare class ViewportDragOperationComponent mixins ActorComponent {
   DragOperation: ViewportDragOperation;
-  DragOperationSubclass: UnrealEngineClassT<any>;
+  DragOperationSubclass: UnrealEngineClassT;
   static Load(ResourceName: string): ViewportDragOperationComponent;
   static Find(
     Outer: UObject,
@@ -2869,7 +2869,7 @@ declare class MovieSceneCopyableTrack mixins UObject {
   static C(Other: UObject | any): MovieSceneCopyableTrack;
 }
 declare class Exporter mixins UObject {
-  SupportedClass: UnrealEngineClassT<any>;
+  SupportedClass: UnrealEngineClassT;
   ExportRootScope: UObject;
   FormatExtension: string[];
   FormatDescription: string[];
@@ -3593,7 +3593,7 @@ declare class GameMode mixins GameModeBase {
   NumBots: number;
   MinRespawnDelay: number;
   NumTravellingPlayers: number;
-  EngineMessageClass: UnrealEngineClassT<any>;
+  EngineMessageClass: UnrealEngineClassT;
   InactivePlayerArray: PlayerState[];
   InactivePlayerStateLifeSpan: number;
   MaxInactivePlayers: number;
@@ -4947,22 +4947,22 @@ declare class NavAreaMeta mixins NavArea {
   static C(Other: UObject | any): NavAreaMeta;
 }
 declare class NavAreaMeta_SwitchByAgent mixins NavAreaMeta {
-  Agent0Area: UnrealEngineClassT<any>;
-  Agent1Area: UnrealEngineClassT<any>;
-  Agent2Area: UnrealEngineClassT<any>;
-  Agent3Area: UnrealEngineClassT<any>;
-  Agent4Area: UnrealEngineClassT<any>;
-  Agent5Area: UnrealEngineClassT<any>;
-  Agent6Area: UnrealEngineClassT<any>;
-  Agent7Area: UnrealEngineClassT<any>;
-  Agent8Area: UnrealEngineClassT<any>;
-  Agent9Area: UnrealEngineClassT<any>;
-  Agent10Area: UnrealEngineClassT<any>;
-  Agent11Area: UnrealEngineClassT<any>;
-  Agent12Area: UnrealEngineClassT<any>;
-  Agent13Area: UnrealEngineClassT<any>;
-  Agent14Area: UnrealEngineClassT<any>;
-  Agent15Area: UnrealEngineClassT<any>;
+  Agent0Area: UnrealEngineClassT;
+  Agent1Area: UnrealEngineClassT;
+  Agent2Area: UnrealEngineClassT;
+  Agent3Area: UnrealEngineClassT;
+  Agent4Area: UnrealEngineClassT;
+  Agent5Area: UnrealEngineClassT;
+  Agent6Area: UnrealEngineClassT;
+  Agent7Area: UnrealEngineClassT;
+  Agent8Area: UnrealEngineClassT;
+  Agent9Area: UnrealEngineClassT;
+  Agent10Area: UnrealEngineClassT;
+  Agent11Area: UnrealEngineClassT;
+  Agent12Area: UnrealEngineClassT;
+  Agent13Area: UnrealEngineClassT;
+  Agent14Area: UnrealEngineClassT;
+  Agent15Area: UnrealEngineClassT;
   static Load(ResourceName: string): NavAreaMeta_SwitchByAgent;
   static Find(Outer: UObject, ResourceName: string): NavAreaMeta_SwitchByAgent;
   static GetDefaultObject(): NavAreaMeta_SwitchByAgent;
@@ -4990,7 +4990,7 @@ declare class NavCollisionBox {
 declare class NavCollision mixins NavCollisionBase {
   CylinderCollision: NavCollisionCylinder[];
   BoxCollision: NavCollisionBox[];
-  AreaClass: UnrealEngineClassT<any>;
+  AreaClass: UnrealEngineClassT;
   bGatherConvexGeometry: boolean;
   bCreateOnClient: boolean;
   static Load(ResourceName: string): NavCollision;
@@ -5173,7 +5173,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     WorldContextObject: UObject,
     Point: Vector,
     NavData: NavigationData,
-    FilterClass: UnrealEngineClassT<any>,
+    FilterClass: UnrealEngineClassT,
     QueryExtent: Vector
   ): Vector;
   OnNavigationBoundsUpdated(NavVolume: NavMeshBoundsVolume): void;
@@ -5182,7 +5182,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     RayStart: Vector,
     RayEnd: Vector,
     HitLocation?: Vector,
-    FilterClass?: UnrealEngineClassT<any>,
+    FilterClass?: UnrealEngineClassT,
     Querier?: Controller
   ): {
     HitLocation: Vector,
@@ -5193,7 +5193,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     Point: Vector,
     ProjectedLocation?: Vector,
     NavData?: NavigationData,
-    FilterClass?: UnrealEngineClassT<any>,
+    FilterClass?: UnrealEngineClassT,
     QueryExtent?: Vector
   ): {
     ProjectedLocation: Vector,
@@ -5205,7 +5205,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     RandomLocation?: Vector,
     Radius?: number,
     NavData?: NavigationData,
-    FilterClass?: UnrealEngineClassT<any>
+    FilterClass?: UnrealEngineClassT
   ): {
     RandomLocation: Vector,
     $: boolean
@@ -5216,7 +5216,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     RandomLocation?: Vector,
     Radius?: number,
     NavData?: NavigationData,
-    FilterClass?: UnrealEngineClassT<any>
+    FilterClass?: UnrealEngineClassT
   ): {
     RandomLocation: Vector,
     $: boolean
@@ -5228,14 +5228,14 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     Origin: Vector,
     Radius: number,
     NavData: NavigationData,
-    FilterClass: UnrealEngineClassT<any>
+    FilterClass: UnrealEngineClassT
   ): Vector;
   static GetRandomPointInNavigableRadius(
     WorldContextObject: UObject,
     Origin: Vector,
     Radius: number,
     NavData: NavigationData,
-    FilterClass: UnrealEngineClassT<any>
+    FilterClass: UnrealEngineClassT
   ): Vector;
   static GetPathLength(
     WorldContextObject: UObject,
@@ -5243,7 +5243,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     PathEnd: Vector,
     PathLength?: number,
     NavData?: NavigationData,
-    FilterClass?: UnrealEngineClassT<any>
+    FilterClass?: UnrealEngineClassT
   ): {
     PathLength: number,
     $: ENavigationQueryResultT
@@ -5254,7 +5254,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     PathEnd: Vector,
     PathCost?: number,
     NavData?: NavigationData,
-    FilterClass?: UnrealEngineClassT<any>
+    FilterClass?: UnrealEngineClassT
   ): {
     PathCost: number,
     $: ENavigationQueryResultT
@@ -5265,7 +5265,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     PathStart: Vector,
     PathEnd: Vector,
     PathfindingContext: Actor,
-    FilterClass: UnrealEngineClassT<any>
+    FilterClass: UnrealEngineClassT
   ): NavigationPath;
   static FindPathToActorSynchronously(
     WorldContextObject: UObject,
@@ -5273,7 +5273,7 @@ declare class NavigationSystemV1 mixins NavigationSystemBase {
     GoalActor: Actor,
     TetherDistance: number,
     PathfindingContext: Actor,
-    FilterClass: UnrealEngineClassT<any>
+    FilterClass: UnrealEngineClassT
   ): NavigationPath;
   static C(Other: UObject | any): NavigationSystemV1;
 }
@@ -5347,7 +5347,7 @@ declare class NavigationTestingActor mixins Actor {
   PathCost: number;
   PathfindingSteps: number;
   OtherActor: NavigationTestingActor;
-  FilterClass: UnrealEngineClassT<any>;
+  FilterClass: UnrealEngineClassT;
   ShowStepIndex: number;
   OffsetFromCornersDistance: number;
   static GetDefaultObject(): NavigationTestingActor;
@@ -5404,7 +5404,7 @@ declare class NavigationLinkBase {
   bCustomFlag5: boolean;
   bCustomFlag6: boolean;
   bCustomFlag7: boolean;
-  AreaClass: UnrealEngineClassT<any>;
+  AreaClass: UnrealEngineClassT;
   clone(): NavigationLinkBase;
   static C(Other: UObject | any): NavigationLinkBase;
 }
@@ -5444,8 +5444,8 @@ declare class NavRelevantComponent mixins ActorComponent {
 }
 declare class NavLinkCustomComponent mixins NavRelevantComponent {
   NavLinkUserId: any;
-  EnabledAreaClass: UnrealEngineClassT<any>;
-  DisabledAreaClass: UnrealEngineClassT<any>;
+  EnabledAreaClass: UnrealEngineClassT;
+  DisabledAreaClass: UnrealEngineClassT;
   LinkRelativeStart: Vector;
   LinkRelativeEnd: Vector;
   LinkDirection: ENavLinkDirectionT;
@@ -5455,7 +5455,7 @@ declare class NavLinkCustomComponent mixins NavRelevantComponent {
   bCreateBoxObstacle: boolean;
   ObstacleOffset: Vector;
   ObstacleExtent: Vector;
-  ObstacleAreaClass: UnrealEngineClassT<any>;
+  ObstacleAreaClass: UnrealEngineClassT;
   BroadcastRadius: number;
   BroadcastInterval: number;
   BroadcastChannel: ECollisionChannelT;
@@ -5553,7 +5553,7 @@ declare class NavMeshRenderingComponent mixins PrimitiveComponent {
   static C(Other: UObject | any): NavMeshRenderingComponent;
 }
 declare class NavModifierComponent mixins NavRelevantComponent {
-  AreaClass: UnrealEngineClassT<any>;
+  AreaClass: UnrealEngineClassT;
   FailsafeExtent: Vector;
   bIncludeAgentHeight: boolean;
   static Load(ResourceName: string): NavModifierComponent;
@@ -5565,11 +5565,11 @@ declare class NavModifierComponent mixins NavRelevantComponent {
     Required?: boolean,
     Abstract?: boolean
   ): NavModifierComponent;
-  SetAreaClass(NewAreaClass: UnrealEngineClassT<any>): void;
+  SetAreaClass(NewAreaClass: UnrealEngineClassT): void;
   static C(Other: UObject | any): NavModifierComponent;
 }
 declare class NavModifierVolume mixins Volume {
-  AreaClass: UnrealEngineClassT<any>;
+  AreaClass: UnrealEngineClassT;
   static GetDefaultObject(): NavModifierVolume;
   static CreateDefaultSubobject(
     Name: string,
@@ -5577,7 +5577,7 @@ declare class NavModifierVolume mixins Volume {
     Required?: boolean,
     Abstract?: boolean
   ): NavModifierVolume;
-  SetAreaClass(NewAreaClass: UnrealEngineClassT<any>): void;
+  SetAreaClass(NewAreaClass: UnrealEngineClassT): void;
   static C(Other: UObject | any): NavModifierVolume;
 }
 declare class NavNodeInterface mixins Interface {
@@ -5648,7 +5648,7 @@ declare class GameplayTask_ClaimResource mixins GameplayTask {
 declare class GameplayTask_SpawnActor mixins GameplayTask {
   Success: UnrealEngineMulticastDelegate<(SpawnedActor: Actor) => void>;
   DidNotSpawn: UnrealEngineMulticastDelegate<(SpawnedActor: Actor) => void>;
-  ClassToSpawn: UnrealEngineClassT<any>;
+  ClassToSpawn: UnrealEngineClassT;
   static Load(ResourceName: string): GameplayTask_SpawnActor;
   static Find(Outer: UObject, ResourceName: string): GameplayTask_SpawnActor;
   static GetDefaultObject(): GameplayTask_SpawnActor;
@@ -6159,7 +6159,7 @@ declare class BlueprintGameplayTagLibrary mixins BlueprintFunctionLibrary {
   static GetDebugStringFromGameplayTag(GameplayTag: GameplayTag): string;
   static GetAllActorsOfClassMatchingTagQuery(
     WorldContextObject: UObject,
-    ActorClass: UnrealEngineClassT<any>,
+    ActorClass: UnrealEngineClassT,
     GameplayTagQuery: GameplayTagQuery,
     OutActors?: Actor[]
   ): {
@@ -6523,7 +6523,7 @@ declare class AIBlueprintHelperLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static SpawnAIFromClass(
     WorldContextObject: UObject,
-    PawnClass: UnrealEngineClassT<any>,
+    PawnClass: UnrealEngineClassT,
     BehaviorTree: BehaviorTree,
     Location: Vector,
     Rotation: Rotator,
@@ -6606,7 +6606,7 @@ declare class AIPerceptionListenerInterface mixins Interface {
 }
 declare class AIPerceptionStimuliSourceComponent mixins ActorComponent {
   bAutoRegisterAsSource: boolean;
-  RegisterAsSourceForSenses: UnrealEngineClassT<any>[];
+  RegisterAsSourceForSenses: UnrealEngineClassT[];
   static Load(ResourceName: string): AIPerceptionStimuliSourceComponent;
   static Find(
     Outer: UObject,
@@ -6619,10 +6619,10 @@ declare class AIPerceptionStimuliSourceComponent mixins ActorComponent {
     Required?: boolean,
     Abstract?: boolean
   ): AIPerceptionStimuliSourceComponent;
-  UnregisterFromSense(SenseClass: UnrealEngineClassT<any>): void;
+  UnregisterFromSense(SenseClass: UnrealEngineClassT): void;
   UnregisterFromPerceptionSystem(): void;
   RegisterWithPerceptionSystem(): void;
-  RegisterForSense(SenseClass: UnrealEngineClassT<any>): void;
+  RegisterForSense(SenseClass: UnrealEngineClassT): void;
   static C(Other: UObject | any): AIPerceptionStimuliSourceComponent;
 }
 declare class AIResourceInterface mixins Interface {
@@ -6692,7 +6692,7 @@ declare class UserDefinedStruct mixins ScriptStruct {
   static C(Other: UObject | any): UserDefinedStruct;
 }
 declare class AISense_Blueprint mixins AISense {
-  ListenerDataType: UnrealEngineClassT<any>;
+  ListenerDataType: UnrealEngineClassT;
   ListenerContainer: AIPerceptionComponent[];
   UnprocessedEvents: AISenseEvent[];
   static Load(ResourceName: string): AISense_Blueprint;
@@ -6889,7 +6889,7 @@ declare class AISenseBlueprintListener mixins UserDefinedStruct {
   static C(Other: UObject | any): AISenseBlueprintListener;
 }
 declare class AISenseConfig_Blueprint mixins AISenseConfig {
-  Implementation: UnrealEngineClassT<any>;
+  Implementation: UnrealEngineClassT;
   static Load(ResourceName: string): AISenseConfig_Blueprint;
   static Find(Outer: UObject, ResourceName: string): AISenseConfig_Blueprint;
   static GetDefaultObject(): AISenseConfig_Blueprint;
@@ -6902,7 +6902,7 @@ declare class AISenseConfig_Blueprint mixins AISenseConfig {
   static C(Other: UObject | any): AISenseConfig_Blueprint;
 }
 declare class AISenseConfig_Damage mixins AISenseConfig {
-  Implementation: UnrealEngineClassT<any>;
+  Implementation: UnrealEngineClassT;
   static Load(ResourceName: string): AISenseConfig_Damage;
   static Find(Outer: UObject, ResourceName: string): AISenseConfig_Damage;
   static GetDefaultObject(): AISenseConfig_Damage;
@@ -6922,7 +6922,7 @@ declare class AISenseAffiliationFilter {
   static C(Other: UObject | any): AISenseAffiliationFilter;
 }
 declare class AISenseConfig_Hearing mixins AISenseConfig {
-  Implementation: UnrealEngineClassT<any>;
+  Implementation: UnrealEngineClassT;
   HearingRange: number;
   LoSHearingRange: number;
   bUseLoSHearing: boolean;
@@ -6951,7 +6951,7 @@ declare class AISenseConfig_Prediction mixins AISenseConfig {
   static C(Other: UObject | any): AISenseConfig_Prediction;
 }
 declare class AISenseConfig_Sight mixins AISenseConfig {
-  Implementation: UnrealEngineClassT<any>;
+  Implementation: UnrealEngineClassT;
   SightRadius: number;
   LoseSightRadius: number;
   PeripheralVisionAngleDegrees: number;
@@ -7136,7 +7136,7 @@ declare class BlackboardKeyType_Bool mixins BlackboardKeyType {
   static C(Other: UObject | any): BlackboardKeyType_Bool;
 }
 declare class BlackboardKeyType_Class mixins BlackboardKeyType {
-  BaseClass: UnrealEngineClassT<any>;
+  BaseClass: UnrealEngineClassT;
   static Load(ResourceName: string): BlackboardKeyType_Class<any>;
   static Find(
     Outer: UObject,
@@ -7220,7 +7220,7 @@ declare class BlackboardKeyType_NativeEnum mixins BlackboardKeyType {
   static C(Other: UObject | any): BlackboardKeyType_NativeEnum;
 }
 declare class BlackboardKeyType_Object mixins BlackboardKeyType {
-  BaseClass: UnrealEngineClassT<any>;
+  BaseClass: UnrealEngineClassT;
   static Load(ResourceName: string): BlackboardKeyType_Object;
   static Find(Outer: UObject, ResourceName: string): BlackboardKeyType_Object;
   static GetDefaultObject(): BlackboardKeyType_Object;
@@ -7561,7 +7561,7 @@ declare class BTDecorator_DoesPathExist mixins BTDecorator {
   BlackboardKeyB: BlackboardKeySelector;
   bUseSelf: boolean;
   PathQueryType: EPathExistanceQueryTypeT;
-  FilterClass: UnrealEngineClassT<any>;
+  FilterClass: UnrealEngineClassT;
   static Load(ResourceName: string): BTDecorator_DoesPathExist;
   static Find(Outer: UObject, ResourceName: string): BTDecorator_DoesPathExist;
   static GetDefaultObject(): BTDecorator_DoesPathExist;
@@ -7615,7 +7615,7 @@ declare class BTDecorator_IsAtLocation mixins BTDecorator_BlackboardBase {
   static C(Other: UObject | any): BTDecorator_IsAtLocation;
 }
 declare class BTDecorator_IsBBEntryOfClass mixins BTDecorator_BlackboardBase {
-  TestClass: UnrealEngineClassT<any>;
+  TestClass: UnrealEngineClassT;
   static Load(ResourceName: string): BTDecorator_IsBBEntryOfClass<any>;
   static Find(
     Outer: UObject,
@@ -7776,7 +7776,7 @@ declare class BTFunctionLibrary mixins BlueprintFunctionLibrary {
   static SetBlackboardValueAsClass(
     NodeOwner: BTNode,
     Key: BlackboardKeySelector,
-    Value: UnrealEngineClassT<any>
+    Value: UnrealEngineClassT
   ): void;
   static SetBlackboardValueAsBool(
     NodeOwner: BTNode,
@@ -7820,7 +7820,7 @@ declare class BTFunctionLibrary mixins BlueprintFunctionLibrary {
   static GetBlackboardValueAsClass(
     NodeOwner: BTNode,
     Key: BlackboardKeySelector
-  ): UnrealEngineClassT<any>;
+  ): UnrealEngineClassT;
   static GetBlackboardValueAsBool(
     NodeOwner: BTNode,
     Key: BlackboardKeySelector
@@ -8025,7 +8025,7 @@ declare class BTTask_MakeNoise mixins BTTaskNode {
 }
 declare class BTTask_MoveTo mixins BTTask_BlackboardBase {
   AcceptableRadius: number;
-  FilterClass: UnrealEngineClassT<any>;
+  FilterClass: UnrealEngineClassT;
   ObservedBlackboardValueTolerance: number;
   bObserveBlackboardValue: boolean;
   bAllowStrafe: boolean;
@@ -8425,10 +8425,10 @@ declare class EnvQueryDebugHelpers mixins UObject {
   static C(Other: UObject | any): EnvQueryDebugHelpers;
 }
 declare class EnvQueryGenerator_ActorsOfClass mixins EnvQueryGenerator {
-  SearchedActorClass: UnrealEngineClassT<any>;
+  SearchedActorClass: UnrealEngineClassT;
   GenerateOnlyActorsInRadius: AIDataProviderBoolValue;
   SearchRadius: AIDataProviderFloatValue;
-  SearchCenter: UnrealEngineClassT<any>;
+  SearchCenter: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryGenerator_ActorsOfClass<any>;
   static Find(
     Outer: UObject,
@@ -8445,8 +8445,8 @@ declare class EnvQueryGenerator_ActorsOfClass mixins EnvQueryGenerator {
 }
 declare class EnvQueryGenerator_BlueprintBase mixins EnvQueryGenerator {
   GeneratorsActionDescription: string;
-  Context: UnrealEngineClassT<any>;
-  GeneratedItemType: UnrealEngineClassT<any>;
+  Context: UnrealEngineClassT;
+  GeneratedItemType: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryGenerator_BlueprintBase;
   static Find(
     Outer: UObject,
@@ -8469,7 +8469,7 @@ declare class EnvQueryGenerator_Composite mixins EnvQueryGenerator {
   Generators: EnvQueryGenerator[];
   bAllowDifferentItemTypes: boolean;
   bHasMatchingItemType: boolean;
-  ForcedItemType: UnrealEngineClassT<any>;
+  ForcedItemType: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryGenerator_Composite;
   static Find(
     Outer: UObject,
@@ -8512,7 +8512,7 @@ declare var EEnvQueryTrace: {
 };
 declare class EnvTraceData {
   VersionNum: number;
-  NavigationFilter: UnrealEngineClassT<any>;
+  NavigationFilter: UnrealEngineClassT;
   ProjectDown: number;
   ProjectUp: number;
   ExtentX: number;
@@ -8553,7 +8553,7 @@ declare class EnvQueryGenerator_Cone mixins EnvQueryGenerator_ProjectedPoints {
   ConeDegrees: AIDataProviderFloatValue;
   AngleStep: AIDataProviderFloatValue;
   Range: AIDataProviderFloatValue;
-  CenterActor: UnrealEngineClassT<any>;
+  CenterActor: UnrealEngineClassT;
   bIncludeContextLocation: boolean;
   static Load(ResourceName: string): EnvQueryGenerator_Cone;
   static Find(Outer: UObject, ResourceName: string): EnvQueryGenerator_Cone;
@@ -8567,7 +8567,7 @@ declare class EnvQueryGenerator_Cone mixins EnvQueryGenerator_ProjectedPoints {
   static C(Other: UObject | any): EnvQueryGenerator_Cone;
 }
 declare class EnvQueryGenerator_CurrentLocation mixins EnvQueryGenerator {
-  QueryContext: UnrealEngineClassT<any>;
+  QueryContext: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryGenerator_CurrentLocation;
   static Find(
     Outer: UObject,
@@ -8594,9 +8594,9 @@ declare var EEnvDirection: {
   EEnvDirection_MAX: "EEnvDirection_MAX"
 };
 declare class EnvDirection {
-  LineFrom: UnrealEngineClassT<any>;
-  LineTo: UnrealEngineClassT<any>;
-  Rotation: UnrealEngineClassT<any>;
+  LineFrom: UnrealEngineClassT;
+  LineTo: UnrealEngineClassT;
+  Rotation: UnrealEngineClassT;
   DirMode: EEnvDirectionT;
   clone(): EnvDirection;
   static C(Other: UObject | any): EnvDirection;
@@ -8609,7 +8609,7 @@ declare class EnvQueryGenerator_Donut mixins EnvQueryGenerator_ProjectedPoints {
   ArcDirection: EnvDirection;
   ArcAngle: AIDataProviderFloatValue;
   bUseSpiralPattern: boolean;
-  Center: UnrealEngineClassT<any>;
+  Center: UnrealEngineClassT;
   bDefineArc: boolean;
   static Load(ResourceName: string): EnvQueryGenerator_Donut;
   static Find(Outer: UObject, ResourceName: string): EnvQueryGenerator_Donut;
@@ -8640,7 +8640,7 @@ declare class EnvQueryGenerator_OnCircle
   ArcDirection: EnvDirection;
   ArcAngle: AIDataProviderFloatValue;
   AngleRadians: number;
-  CircleCenter: UnrealEngineClassT<any>;
+  CircleCenter: UnrealEngineClassT;
   bIgnoreAnyContextActorsWhenGeneratingCircle: boolean;
   CircleCenterZOffset: AIDataProviderFloatValue;
   TraceData: EnvTraceData;
@@ -8660,7 +8660,7 @@ declare class EnvQueryGenerator_SimpleGrid
   mixins EnvQueryGenerator_ProjectedPoints {
   GridSize: AIDataProviderFloatValue;
   SpaceBetween: AIDataProviderFloatValue;
-  GenerateAround: UnrealEngineClassT<any>;
+  GenerateAround: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryGenerator_SimpleGrid;
   static Find(
     Outer: UObject,
@@ -8678,7 +8678,7 @@ declare class EnvQueryGenerator_SimpleGrid
 declare class EnvQueryGenerator_PathingGrid
   mixins EnvQueryGenerator_SimpleGrid {
   PathToItem: AIDataProviderBoolValue;
-  NavigationFilter: UnrealEngineClassT<any>;
+  NavigationFilter: UnrealEngineClassT;
   ScanRangeMultiplier: AIDataProviderFloatValue;
   static Load(ResourceName: string): EnvQueryGenerator_PathingGrid;
   static Find(
@@ -8772,7 +8772,7 @@ declare var EEnvTestDistance: {
 };
 declare class EnvQueryTest_Distance mixins EnvQueryTest {
   TestMode: EEnvTestDistanceT;
-  DistanceTo: UnrealEngineClassT<any>;
+  DistanceTo: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryTest_Distance;
   static Find(Outer: UObject, ResourceName: string): EnvQueryTest_Distance;
   static GetDefaultObject(): EnvQueryTest_Distance;
@@ -8871,10 +8871,10 @@ declare var EEnvTestPathfinding: {
 };
 declare class EnvQueryTest_Pathfinding mixins EnvQueryTest {
   TestMode: EEnvTestPathfindingT;
-  Context: UnrealEngineClassT<any>;
+  Context: UnrealEngineClassT;
   PathFromContext: AIDataProviderBoolValue;
   SkipUnreachable: AIDataProviderBoolValue;
-  FilterClass: UnrealEngineClassT<any>;
+  FilterClass: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryTest_Pathfinding;
   static Find(Outer: UObject, ResourceName: string): EnvQueryTest_Pathfinding;
   static GetDefaultObject(): EnvQueryTest_Pathfinding;
@@ -8932,7 +8932,7 @@ declare class EnvQueryTest_Trace mixins EnvQueryTest {
   TraceFromContext: AIDataProviderBoolValue;
   ItemHeightOffset: AIDataProviderFloatValue;
   ContextHeightOffset: AIDataProviderFloatValue;
-  Context: UnrealEngineClassT<any>;
+  Context: UnrealEngineClassT;
   static Load(ResourceName: string): EnvQueryTest_Trace;
   static Find(Outer: UObject, ResourceName: string): EnvQueryTest_Trace;
   static GetDefaultObject(): EnvQueryTest_Trace;
@@ -9125,7 +9125,7 @@ declare class PawnAction_Move mixins PawnAction {
   GoalActor: Actor;
   GoalLocation: Vector;
   AcceptableRadius: number;
-  FilterClass: UnrealEngineClassT<any>;
+  FilterClass: UnrealEngineClassT;
   bAllowStrafe: boolean;
   bFinishOnOverlap: boolean;
   bUsePathfinding: boolean;
@@ -9365,7 +9365,7 @@ declare class K2Node_EditablePinBase mixins K2Node {
 }
 declare class K2Node_Event mixins K2Node_EditablePinBase {
   EventSignatureName: string;
-  EventSignatureClass: UnrealEngineClassT<any>;
+  EventSignatureClass: UnrealEngineClassT;
   EventReference: MemberReference;
   bOverrideFunction: boolean;
   bInternalEvent: boolean;
@@ -9547,7 +9547,7 @@ declare class UMGEditorProjectSettings mixins DeveloperSettings {
   bShowWidgetsFromDeveloperContent: boolean;
   CategoriesToHide: string[];
   WidgetClassesToHide: SoftClassPath[];
-  DefaultRootWidget: UnrealEngineClassT<any>;
+  DefaultRootWidget: UnrealEngineClassT;
   DebugResolutions: DebugResolution[];
   Version: number;
   bCookSlowConstructionWidgetTree: boolean;
@@ -9565,7 +9565,7 @@ declare class UMGEditorProjectSettings mixins DeveloperSettings {
 }
 declare class WidgetBlueprintFactory mixins Factory {
   BlueprintType: EBlueprintTypeT;
-  ParentClass: UnrealEngineClassT<any>;
+  ParentClass: UnrealEngineClassT;
   static Load(ResourceName: string): WidgetBlueprintFactory;
   static Find(Outer: UObject, ResourceName: string): WidgetBlueprintFactory;
   static GetDefaultObject(): WidgetBlueprintFactory;
@@ -10338,13 +10338,13 @@ declare class MaterialEditingLibrary mixins BlueprintFunctionLibrary {
   static DeleteAllMaterialExpressions(Material: Material): void;
   static CreateMaterialExpressionInFunction(
     MaterialFunction: MaterialFunction,
-    ExpressionClass: UnrealEngineClassT<any>,
+    ExpressionClass: UnrealEngineClassT,
     NodePosX: number,
     NodePosY: number
   ): MaterialExpression;
   static CreateMaterialExpression(
     Material: Material,
-    ExpressionClass: UnrealEngineClassT<any>,
+    ExpressionClass: UnrealEngineClassT,
     NodePosX: number,
     NodePosY: number
   ): MaterialExpression;
@@ -10410,7 +10410,7 @@ declare class LevelSequence mixins MovieSceneSequence {
   BindingReferences: LevelSequenceBindingReferences;
   PossessedObjects: any;
   DirectorBlueprint: Blueprint;
-  DirectorClass: UnrealEngineClassT<any>;
+  DirectorClass: UnrealEngineClassT;
   MetaDataObjects: UObject[];
   static Load(ResourceName: string): LevelSequence;
   static Find(Outer: UObject, ResourceName: string): LevelSequence;
@@ -10421,9 +10421,9 @@ declare class LevelSequence mixins MovieSceneSequence {
     Required?: boolean,
     Abstract?: boolean
   ): LevelSequence;
-  RemoveMetaDataByClass(InClass: UnrealEngineClassT<any>): void;
-  FindOrAddMetaDataByClass(InClass: UnrealEngineClassT<any>): UObject;
-  FindMetaDataByClass(InClass: UnrealEngineClassT<any>): UObject;
+  RemoveMetaDataByClass(InClass: UnrealEngineClassT): void;
+  FindOrAddMetaDataByClass(InClass: UnrealEngineClassT): UObject;
+  FindMetaDataByClass(InClass: UnrealEngineClassT): UObject;
   CopyMetaData(InMetaData: UObject): UObject;
   static C(Other: UObject | any): LevelSequence;
 }
@@ -10538,24 +10538,24 @@ declare var EAudioRecordingMode: {
   EAudioRecordingMode_MAX: "EAudioRecordingMode_MAX"
 };
 declare class SequenceRecorderActorFilter {
-  ActorClassesToRecord: UnrealEngineClassT<any>[];
+  ActorClassesToRecord: UnrealEngineClassT[];
   clone(): SequenceRecorderActorFilter;
   static C(Other: UObject | any): SequenceRecorderActorFilter;
 }
 declare class PropertiesToRecordForClass {
-  Class: UnrealEngineClassT<any>;
+  Class: UnrealEngineClassT;
   Properties: string[];
   clone(): PropertiesToRecordForClass<any>;
   static C(Other: UObject | any): PropertiesToRecordForClass;
 }
 declare class PropertiesToRecordForActorClass {
-  Class: UnrealEngineClassT<any>;
+  Class: UnrealEngineClassT;
   Properties: string[];
   clone(): PropertiesToRecordForActorClass<any>;
   static C(Other: UObject | any): PropertiesToRecordForActorClass;
 }
 declare class SettingsForActorClass {
-  Class: UnrealEngineClassT<any>;
+  Class: UnrealEngineClassT;
   bRecordToPossessable: boolean;
   clone(): SettingsForActorClass<any>;
   static C(Other: UObject | any): SettingsForActorClass;
@@ -10794,7 +10794,7 @@ declare class MovieSceneUserImportFBXSettings mixins UObject {
   static C(Other: UObject | any): MovieSceneUserImportFBXSettings;
 }
 declare class BlueprintNodeSpawner mixins UObject {
-  NodeClass: UnrealEngineClassT<any>;
+  NodeClass: UnrealEngineClassT;
   static Load(ResourceName: string): BlueprintNodeSpawner;
   static Find(Outer: UObject, ResourceName: string): BlueprintNodeSpawner;
   static GetDefaultObject(): BlueprintNodeSpawner;
@@ -10849,7 +10849,7 @@ declare class BlueprintBoundNodeSpawner mixins BlueprintNodeSpawner {
   static C(Other: UObject | any): BlueprintBoundNodeSpawner;
 }
 declare class BlueprintComponentNodeSpawner mixins BlueprintNodeSpawner {
-  ComponentClass: UnrealEngineClassT<any>;
+  ComponentClass: UnrealEngineClassT;
   ComponentName: string;
   ComponentAssetName: string;
   static Load(ResourceName: string): BlueprintComponentNodeSpawner;
@@ -10980,7 +10980,7 @@ declare class BlueprintVariableNodeSpawner mixins BlueprintFieldNodeSpawner {
 }
 declare class K2Node_ActorBoundEvent mixins K2Node_Event {
   DelegatePropertyName: string;
-  DelegateOwnerClass: UnrealEngineClassT<any>;
+  DelegateOwnerClass: UnrealEngineClassT;
   EventOwner: Actor;
   static Load(ResourceName: string): K2Node_ActorBoundEvent;
   static Find(Outer: UObject, ResourceName: string): K2Node_ActorBoundEvent;
@@ -10996,7 +10996,7 @@ declare class K2Node_ActorBoundEvent mixins K2Node_Event {
 declare class K2Node_AddComponent mixins K2Node_CallFunction {
   bHasExposedVariable: boolean;
   TemplateBlueprint: string;
-  TemplateType: UnrealEngineClassT<any>;
+  TemplateType: UnrealEngineClassT;
   static Load(ResourceName: string): K2Node_AddComponent;
   static Find(Outer: UObject, ResourceName: string): K2Node_AddComponent;
   static GetDefaultObject(): K2Node_AddComponent;
@@ -11094,7 +11094,7 @@ declare var ESelfContextInfo: {
 declare class K2Node_Variable mixins K2Node {
   VariableReference: MemberReference;
   SelfContextInfo: ESelfContextInfoT;
-  VariableSourceClass: UnrealEngineClassT<any>;
+  VariableSourceClass: UnrealEngineClassT;
   VariableName: string;
   bSelfContext: boolean;
   static Load(ResourceName: string): K2Node_Variable;
@@ -11249,7 +11249,7 @@ declare class K2Node_CastByteToEnum mixins K2Node {
   static C(Other: UObject | any): K2Node_CastByteToEnum;
 }
 declare class K2Node_DynamicCast mixins K2Node {
-  TargetType: UnrealEngineClassT<any>;
+  TargetType: UnrealEngineClassT;
   bIsPureCast: boolean;
   static Load(ResourceName: string): K2Node_DynamicCast;
   static Find(Outer: UObject, ResourceName: string): K2Node_DynamicCast;
@@ -11307,7 +11307,7 @@ declare class K2Node_CommutativeAssociativeBinaryOperator
 }
 declare class K2Node_ComponentBoundEvent mixins K2Node_Event {
   DelegatePropertyName: string;
-  DelegateOwnerClass: UnrealEngineClassT<any>;
+  DelegateOwnerClass: UnrealEngineClassT;
   ComponentPropertyName: string;
   DelegatePropertyDisplayName: string;
   static Load(ResourceName: string): K2Node_ComponentBoundEvent;
@@ -11427,7 +11427,7 @@ declare class K2Node_DeadClass mixins K2Node {
 }
 declare class K2Node_DelegateSet mixins K2Node {
   DelegatePropertyName: string;
-  DelegatePropertyClass: UnrealEngineClassT<any>;
+  DelegatePropertyClass: UnrealEngineClassT;
   static Load(ResourceName: string): K2Node_DelegateSet;
   static Find(Outer: UObject, ResourceName: string): K2Node_DelegateSet;
   static GetDefaultObject(): K2Node_DelegateSet;
@@ -11572,7 +11572,7 @@ declare class K2Node_FormatText mixins K2Node {
 }
 declare class K2Node_FunctionTerminator mixins K2Node_EditablePinBase {
   FunctionReference: MemberReference;
-  SignatureClass: UnrealEngineClassT<any>;
+  SignatureClass: UnrealEngineClassT;
   SignatureName: string;
   static Load(ResourceName: string): K2Node_FunctionTerminator;
   static Find(Outer: UObject, ResourceName: string): K2Node_FunctionTerminator;
@@ -11758,7 +11758,7 @@ declare class K2Node_GetNumEnumEntries mixins K2Node {
   static C(Other: UObject | any): K2Node_GetNumEnumEntries;
 }
 declare class K2Node_GetSubsystem mixins K2Node {
-  CustomClass: UnrealEngineClassT<any>;
+  CustomClass: UnrealEngineClassT;
   static Load(ResourceName: string): K2Node_GetSubsystem;
   static Find(Outer: UObject, ResourceName: string): K2Node_GetSubsystem;
   static GetDefaultObject(): K2Node_GetSubsystem;
@@ -12306,7 +12306,7 @@ declare class K2Node_SpawnActorFromClass
 declare class K2Node_Switch mixins K2Node {
   bHasDefaultPin: boolean;
   FunctionName: string;
-  FunctionClass: UnrealEngineClassT<any>;
+  FunctionClass: UnrealEngineClassT;
   static Load(ResourceName: string): K2Node_Switch;
   static Find(Outer: UObject, ResourceName: string): K2Node_Switch;
   static GetDefaultObject(): K2Node_Switch;
@@ -12861,7 +12861,7 @@ declare class MovieSceneCameraCutTrack mixins MovieSceneNameableTrack {
   static C(Other: UObject | any): MovieSceneCameraCutTrack;
 }
 declare class MovieSceneCameraShakeSectionData {
-  ShakeClass: UnrealEngineClassT<any>;
+  ShakeClass: UnrealEngineClassT;
   PlayScale: number;
   PlaySpace: ECameraAnimPlaySpaceT;
   UserDefinedPlaySpace: Rotator;
@@ -12870,7 +12870,7 @@ declare class MovieSceneCameraShakeSectionData {
 }
 declare class MovieSceneCameraShakeSection mixins MovieSceneSection {
   ShakeData: MovieSceneCameraShakeSectionData;
-  ShakeClass: UnrealEngineClassT<any>;
+  ShakeClass: UnrealEngineClassT;
   PlayScale: number;
   PlaySpace: ECameraAnimPlaySpaceT;
   UserDefinedPlaySpace: Rotator;
@@ -13303,7 +13303,7 @@ declare class MovieSceneObjectPathChannelKeyValue {
   static C(Other: UObject | any): MovieSceneObjectPathChannelKeyValue;
 }
 declare class MovieSceneObjectPathChannel mixins MovieSceneChannel {
-  PropertyClass: UnrealEngineClassT<any>;
+  PropertyClass: UnrealEngineClassT;
   Times: FrameNumber[];
   Values: MovieSceneObjectPathChannelKeyValue[];
   DefaultValue: MovieSceneObjectPathChannelKeyValue;
@@ -13327,7 +13327,7 @@ declare class MovieSceneObjectPropertySection mixins MovieSceneSection {
   static C(Other: UObject | any): MovieSceneObjectPropertySection;
 }
 declare class MovieSceneObjectPropertyTrack mixins MovieScenePropertyTrack {
-  PropertyClass: UnrealEngineClassT<any>;
+  PropertyClass: UnrealEngineClassT;
   static Load(ResourceName: string): MovieSceneObjectPropertyTrack;
   static Find(
     Outer: UObject,
@@ -13735,7 +13735,7 @@ declare class LevelSequenceBurnIn mixins UserWidget {
     Abstract?: boolean
   ): LevelSequenceBurnIn;
   SetSettings(InSettings: UObject): void;
-  GetSettingsClass(): UnrealEngineClassT<any>;
+  GetSettingsClass(): UnrealEngineClassT;
   static C(Other: UObject | any): LevelSequenceBurnIn;
 }
 declare class LevelSequenceActor mixins Actor {
@@ -14022,7 +14022,7 @@ declare class VREditorFloatingUI mixins VREditorBaseActor {
   UserWidget: UserWidget;
   WidgetComponent: VREditorWidgetComponent;
   WindowMeshComponent: StaticMeshComponent;
-  UserWidgetClass: UnrealEngineClassT<any>;
+  UserWidgetClass: UnrealEngineClassT;
   static GetDefaultObject(): VREditorFloatingUI;
   static CreateDefaultSubobject(
     Name: string,
@@ -14468,8 +14468,8 @@ declare class VRModeSettings mixins VISettings {
   DoubleClickTime: number;
   TriggerPressedThreshold_Vive: number;
   TriggerPressedThreshold_Rift: number;
-  InteractorClass: UnrealEngineClassT<any>;
-  TeleporterClass: UnrealEngineClassT<any>;
+  InteractorClass: UnrealEngineClassT;
+  TeleporterClass: UnrealEngineClassT;
   static Load(ResourceName: string): VRModeSettings;
   static Find(Outer: UObject, ResourceName: string): VRModeSettings;
   static GetDefaultObject(): VRModeSettings;
@@ -15004,8 +15004,8 @@ declare class GenericTeamId {
   static C(Other: UObject | any): GenericTeamId;
 }
 declare class AITestSpawnInfo {
-  PawnClass: UnrealEngineClassT<any>;
-  ControllerClass: UnrealEngineClassT<any>;
+  PawnClass: UnrealEngineClassT;
+  ControllerClass: UnrealEngineClassT;
   TeamID: GenericTeamId;
   BehaviorTree: BehaviorTree;
   SpawnLocation: Actor;
@@ -15200,7 +15200,7 @@ declare var EWidgetTestAppearLocation: {
   EWidgetTestAppearLocation_MAX: "EWidgetTestAppearLocation_MAX"
 };
 declare class FunctionalUIScreenshotTest mixins ScreenshotFunctionalTestBase {
-  WidgetClass: UnrealEngineClassT<any>;
+  WidgetClass: UnrealEngineClassT;
   SpawnedWidget: UserWidget;
   WidgetLocation: EWidgetTestAppearLocationT;
   ScreenshotRT: TextureRenderTarget2D;
@@ -15525,7 +15525,7 @@ declare class SoundSourceBusFactory mixins Factory {
   static C(Other: UObject | any): SoundSourceBusFactory;
 }
 declare class SoundSourceEffectFactory mixins Factory {
-  SoundEffectSourcepresetClass: UnrealEngineClassT<any>;
+  SoundEffectSourcepresetClass: UnrealEngineClassT;
   static Load(ResourceName: string): SoundSourceEffectFactory;
   static Find(Outer: UObject, ResourceName: string): SoundSourceEffectFactory;
   static GetDefaultObject(): SoundSourceEffectFactory;
@@ -15553,7 +15553,7 @@ declare class SoundSourceEffectChainFactory mixins Factory {
   static C(Other: UObject | any): SoundSourceEffectChainFactory;
 }
 declare class SoundSubmixEffectFactory mixins Factory {
-  SoundEffectSubmixPresetClass: UnrealEngineClassT<any>;
+  SoundEffectSubmixPresetClass: UnrealEngineClassT;
   static Load(ResourceName: string): SoundSubmixEffectFactory;
   static Find(Outer: UObject, ResourceName: string): SoundSubmixEffectFactory;
   static GetDefaultObject(): SoundSubmixEffectFactory;
@@ -15618,7 +15618,7 @@ declare class ActorFactory mixins UObject {
   DisplayName: string;
   MenuPriority: number;
   NewActorClassName: string;
-  NewActorClass: UnrealEngineClassT<any>;
+  NewActorClass: UnrealEngineClassT;
   bShowInEditorQuickMenu: boolean;
   bUseSurfaceOrientation: boolean;
   SpawnPositionOffset: Vector;
@@ -16247,7 +16247,7 @@ declare class CompressionHolder mixins UObject {
 }
 declare class AnimBlueprintFactory mixins Factory {
   BlueprintType: EBlueprintTypeT;
-  ParentClass: UnrealEngineClassT<any>;
+  ParentClass: UnrealEngineClassT;
   TargetSkeleton: Skeleton;
   PreviewSkeletalMesh: SkeletalMesh;
   static Load(ResourceName: string): AnimBlueprintFactory;
@@ -16492,7 +16492,7 @@ declare class BlendSpaceThumbnailRenderer mixins DefaultSizedThumbnailRenderer {
   static C(Other: UObject | any): BlendSpaceThumbnailRenderer;
 }
 declare class BlueprintFactory mixins Factory {
-  ParentClass: UnrealEngineClassT<any>;
+  ParentClass: UnrealEngineClassT;
   static Load(ResourceName: string): BlueprintFactory;
   static Find(Outer: UObject, ResourceName: string): BlueprintFactory;
   static GetDefaultObject(): BlueprintFactory;
@@ -17040,7 +17040,7 @@ declare class CurveEdOptions mixins UObject {
   static C(Other: UObject | any): CurveEdOptions;
 }
 declare class CurveFactory mixins Factory {
-  CurveClass: UnrealEngineClassT<any>;
+  CurveClass: UnrealEngineClassT;
   static Load(ResourceName: string): CurveFactory;
   static Find(Outer: UObject, ResourceName: string): CurveFactory;
   static GetDefaultObject(): CurveFactory;
@@ -17153,7 +17153,7 @@ declare class CylinderBuilder mixins EditorBrushBuilder {
   static C(Other: UObject | any): CylinderBuilder;
 }
 declare class DataAssetFactory mixins Factory {
-  DataAssetClass: UnrealEngineClassT<any>;
+  DataAssetClass: UnrealEngineClassT;
   static Load(ResourceName: string): DataAssetFactory;
   static Find(Outer: UObject, ResourceName: string): DataAssetFactory;
   static GetDefaultObject(): DataAssetFactory;
@@ -17844,27 +17844,27 @@ declare class Engine mixins UObject {
   SubtitleFontName: SoftObjectPath;
   AdditionalFonts: Font[];
   AdditionalFontNames: string[];
-  ConsoleClass: UnrealEngineClassT<any>;
+  ConsoleClass: UnrealEngineClassT;
   ConsoleClassName: SoftClassPath;
-  GameViewportClientClass: UnrealEngineClassT<any>;
+  GameViewportClientClass: UnrealEngineClassT;
   GameViewportClientClassName: SoftClassPath;
-  LocalPlayerClass: UnrealEngineClassT<any>;
+  LocalPlayerClass: UnrealEngineClassT;
   LocalPlayerClassName: SoftClassPath;
-  WorldSettingsClass: UnrealEngineClassT<any>;
+  WorldSettingsClass: UnrealEngineClassT;
   WorldSettingsClassName: SoftClassPath;
   NavigationSystemClassName: SoftClassPath;
-  NavigationSystemClass: UnrealEngineClassT<any>;
+  NavigationSystemClass: UnrealEngineClassT;
   NavigationSystemConfigClassName: SoftClassPath;
-  NavigationSystemConfigClass: UnrealEngineClassT<any>;
+  NavigationSystemConfigClass: UnrealEngineClassT;
   AvoidanceManagerClassName: SoftClassPath;
-  AvoidanceManagerClass: UnrealEngineClassT<any>;
-  PhysicsCollisionHandlerClass: UnrealEngineClassT<any>;
+  AvoidanceManagerClass: UnrealEngineClassT;
+  PhysicsCollisionHandlerClass: UnrealEngineClassT;
   PhysicsCollisionHandlerClassName: SoftClassPath;
   GameUserSettingsClassName: SoftClassPath;
-  GameUserSettingsClass: UnrealEngineClassT<any>;
+  GameUserSettingsClass: UnrealEngineClassT;
   AIControllerClassName: SoftClassPath;
   GameUserSettings: GameUserSettings;
-  LevelScriptActorClass: UnrealEngineClassT<any>;
+  LevelScriptActorClass: UnrealEngineClassT;
   LevelScriptActorClassName: SoftClassPath;
   DefaultBlueprintBaseClassName: SoftClassPath;
   GameSingletonClassName: SoftClassPath;
@@ -18176,7 +18176,7 @@ declare class USelection mixins UObject {
   ): USelection;
   static C(Other: UObject | any): USelection;
   Deselect(InObject: UObject): void;
-  DeselectAll(InClass: UnrealEngineClassT<any>): void;
+  DeselectAll(InClass: UnrealEngineClassT): void;
   GetSelectedObjects(
     Out?: UObject[]
   ): {
@@ -18188,7 +18188,7 @@ declare class USelection mixins UObject {
   static Deselect(USelection: USelection, InObject: UObject): void;
   static DeselectAll(
     USelection: USelection,
-    InClass: UnrealEngineClassT<any>
+    InClass: UnrealEngineClassT
   ): void;
   static GetSelectedObjects(
     USelection: USelection,
@@ -18259,7 +18259,7 @@ declare class EditorEngine mixins Engine {
   bIsSimulatingInEditor: boolean;
   bSquelchTransactionNotification: boolean;
   bNotifyUndoRedoSelectionChange: boolean;
-  PlayFromHerePlayerStartClass: UnrealEngineClassT<any>;
+  PlayFromHerePlayerStartClass: UnrealEngineClassT;
   EditorWorld: World;
   ActorsThatWereSelected: any[];
   PlayWorldDestination: number;
@@ -18318,10 +18318,10 @@ declare class EditorEngine mixins Engine {
     Out: string,
     $: boolean
   };
-  FindBrushBuilder(BrushBuilderClass: UnrealEngineClassT<any>): BrushBuilder;
+  FindBrushBuilder(BrushBuilderClass: UnrealEngineClassT): BrushBuilder;
   GetSelectedComponents(): USelection;
   GetSelectedObjects(): USelection;
-  GetSelectedSet(Class: UnrealEngineClassT<any>): USelection;
+  GetSelectedSet(Class: UnrealEngineClassT): USelection;
   RebuildLevel(Level: Level): void;
   RebuildStaticNavigableGeometry(Level: Level): void;
   RedrawAllViewports(bInvalidateHitProxies: boolean): void;
@@ -18384,13 +18384,13 @@ declare class EditorEngine mixins Engine {
   };
   static FindBrushBuilder(
     Engine: EditorEngine,
-    BrushBuilderClass: UnrealEngineClassT<any>
+    BrushBuilderClass: UnrealEngineClassT
   ): BrushBuilder;
   static GetSelectedComponents(Engine: EditorEngine): USelection;
   static GetSelectedObjects(Engine: EditorEngine): USelection;
   static GetSelectedSet(
     Engine: EditorEngine,
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): USelection;
   static RebuildLevel(Engine: EditorEngine, Level: Level): void;
   static RebuildStaticNavigableGeometry(
@@ -18522,7 +18522,7 @@ declare class EditorLevelUtils mixins UObject {
   ): number;
   static MakeLevelCurrent(InStreamingLevel: LevelStreaming): void;
   static CreateNewStreamingLevel(
-    LevelStreamingClass: UnrealEngineClassT<any>,
+    LevelStreamingClass: UnrealEngineClassT,
     NewLevelPath: string,
     bMoveSelectedActorsIntoNewLevel: boolean
   ): LevelStreaming;
@@ -18962,7 +18962,7 @@ declare class EditorSubsystemBlueprintLibrary mixins BlueprintFunctionLibrary {
     Required?: boolean,
     Abstract?: boolean
   ): EditorSubsystemBlueprintLibrary;
-  static GetEditorSubsystem(Class: UnrealEngineClassT<any>): EditorSubsystem;
+  static GetEditorSubsystem(Class: UnrealEngineClassT): EditorSubsystem;
   static C(Other: UObject | any): EditorSubsystemBlueprintLibrary;
 }
 declare class EnumFactory mixins Factory {
@@ -20087,7 +20087,7 @@ declare class ImportSubsystem mixins EditorSubsystem {
   OnAssetPreImport_BP: UnrealEngineMulticastDelegate<
     (
       InFactory: Factory,
-      InClass: UnrealEngineClassT<any>,
+      InClass: UnrealEngineClassT,
       InParent: UObject,
       Name: string,
       Type: string
@@ -20167,7 +20167,7 @@ declare class LevelEditorMiscSettings mixins DeveloperSettings {
   bEnableRealTimeAudio: boolean;
   EditorVolumeLevel: number;
   bEnableEditorSounds: boolean;
-  DefaultLevelStreamingClass: UnrealEngineClassT<any>;
+  DefaultLevelStreamingClass: UnrealEngineClassT;
   EditorScreenshotSaveDirectory: DirectoryPath;
   static Load(ResourceName: string): LevelEditorMiscSettings;
   static Find(Outer: UObject, ResourceName: string): LevelEditorMiscSettings;
@@ -21462,7 +21462,7 @@ declare class PersonaOptions mixins UObject {
   static C(Other: UObject | any): PersonaOptions;
 }
 declare class PhysicalMaterialFactoryNew mixins Factory {
-  PhysicalMaterialClass: UnrealEngineClassT<any>;
+  PhysicalMaterialClass: UnrealEngineClassT;
   static Load(ResourceName: string): PhysicalMaterialFactoryNew;
   static Find(Outer: UObject, ResourceName: string): PhysicalMaterialFactoryNew;
   static GetDefaultObject(): PhysicalMaterialFactoryNew;
@@ -21906,7 +21906,7 @@ declare class PropertyEditorTestObject mixins UObject {
   Vector4Property: Vector4;
   RotatorProperty: Rotator;
   ObjectProperty: UObject;
-  ClassProperty: UnrealEngineClassT<any>;
+  ClassProperty: UnrealEngineClassT;
   LinearColorProperty: LinearColor;
   ColorProperty: Color;
   EnumProperty: PropertEditorTestEnumT;
@@ -22383,7 +22383,7 @@ declare class SlateBrushThumbnailRenderer mixins DefaultSizedThumbnailRenderer {
   static C(Other: UObject | any): SlateBrushThumbnailRenderer;
 }
 declare class SlateWidgetStyleAssetFactory mixins Factory {
-  StyleType: UnrealEngineClassT<any>;
+  StyleType: UnrealEngineClassT;
   static Load(ResourceName: string): SlateWidgetStyleAssetFactory;
   static Find(
     Outer: UObject,
@@ -22892,7 +22892,7 @@ declare class AnimationThumbnailSkeletalMeshActor mixins SkeletalMeshActor {
 }
 declare class ThumbnailRenderingInfo {
   ClassNeedingThumbnailName: string;
-  ClassNeedingThumbnail: UnrealEngineClassT<any>;
+  ClassNeedingThumbnail: UnrealEngineClassT;
   RendererClassName: string;
   Renderer: ThumbnailRenderer;
   clone(): ThumbnailRenderingInfo;
@@ -24630,7 +24630,7 @@ declare class AmbientSound mixins Actor {
 declare class AnimationSettings mixins DeveloperSettings {
   CompressCommandletVersion: number;
   KeyEndEffectorsMatchNameArray: string[];
-  DefaultCompressionAlgorithm: UnrealEngineClassT<any>;
+  DefaultCompressionAlgorithm: UnrealEngineClassT;
   RotationCompressionFormat: AnimationCompressionFormatT;
   TranslationCompressionFormat: AnimationCompressionFormatT;
   MaxCurveError: number;
@@ -25282,7 +25282,7 @@ declare class PrimaryAssetRules {
 declare class PrimaryAssetTypeInfo {
   PrimaryAssetType: string;
   AssetBaseClass: Class<any>;
-  AssetBaseClassLoaded: UnrealEngineClassT<any>;
+  AssetBaseClassLoaded: UnrealEngineClassT;
   bHasBlueprintClasses: boolean;
   bIsEditorOnly: boolean;
   Directories: DirectoryPath[];
@@ -25378,7 +25378,7 @@ declare class AsyncActionLoadPrimaryAsset
 declare class AsyncActionLoadPrimaryAssetClass
   mixins AsyncActionLoadPrimaryAssetBase {
   Completed: UnrealEngineMulticastDelegate<
-    (Loaded: UnrealEngineClassT<any>) => void
+    (Loaded: UnrealEngineClassT) => void
   >;
   static Load(ResourceName: string): AsyncActionLoadPrimaryAssetClass<any>;
   static Find(
@@ -26321,7 +26321,7 @@ declare class CanvasRenderTarget2D mixins TextureRenderTarget2D {
   };
   static CreateCanvasRenderTarget2D(
     WorldContextObject: UObject,
-    CanvasRenderTarget2DClass: UnrealEngineClassT<any>,
+    CanvasRenderTarget2DClass: UnrealEngineClassT,
     Width: number,
     Height: number
   ): CanvasRenderTarget2D;
@@ -27565,7 +27565,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
     bAutoDestroy: boolean
   ): AudioComponent;
   static SpawnObject(
-    ObjectClass: UnrealEngineClassT<any>,
+    ObjectClass: UnrealEngineClassT,
     Outer: UObject
   ): UObject;
   static SpawnForceFeedbackAttached(
@@ -27751,7 +27751,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
   ): void;
   static PlayWorldCameraShake(
     WorldContextObject: UObject,
-    Shake: UnrealEngineClassT<any>,
+    Shake: UnrealEngineClassT,
     Epicenter: Vector,
     InnerRadius: number,
     OuterRadius: number,
@@ -27865,7 +27865,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
     PlayerIndex: number
   ): PlayerCameraManager;
   static GetPlatformName(): string;
-  static GetObjectClass(UObject: UObject): UnrealEngineClassT<any>;
+  static GetObjectClass(UObject: UObject): UnrealEngineClassT;
   static GetMaxAudioChannelCount(WorldContextObject: UObject): number;
   static GetKeyValue(
     Pair: string,
@@ -27900,14 +27900,14 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
   };
   static GetAllActorsWithInterface(
     WorldContextObject: UObject,
-    Interface: UnrealEngineClassT<any>,
+    Interface: UnrealEngineClassT,
     OutActors?: Actor[]
   ): {
     OutActors: Actor[]
   };
   static GetAllActorsOfClass(
     WorldContextObject: UObject,
-    ActorClass: UnrealEngineClassT<any>,
+    ActorClass: UnrealEngineClassT,
     OutActors?: Actor[]
   ): {
     OutActors: Actor[]
@@ -27970,7 +27970,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
   static CreateSaveGameObjectFromBlueprint(
     SaveGameBlueprint: Blueprint
   ): SaveGame;
-  static CreateSaveGameObject(SaveGameClass: UnrealEngineClassT<any>): SaveGame;
+  static CreateSaveGameObject(SaveGameClass: UnrealEngineClassT): SaveGame;
   static CreatePlayer(
     WorldContextObject: UObject,
     ControllerId: number,
@@ -28091,7 +28091,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
   };
   static BeginSpawningActorFromClass(
     WorldContextObject: UObject,
-    ActorClass: UnrealEngineClassT<any>,
+    ActorClass: UnrealEngineClassT,
     SpawnTransform: Transform,
     bNoCollisionFail: boolean,
     Owner: Actor
@@ -28104,7 +28104,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
   ): Actor;
   static BeginDeferredActorSpawnFromClass(
     WorldContextObject: UObject,
-    ActorClass: UnrealEngineClassT<any>,
+    ActorClass: UnrealEngineClassT,
     SpawnTransform: Transform,
     CollisionHandlingOverride: ESpawnActorCollisionHandlingMethodT,
     Owner: Actor
@@ -28123,7 +28123,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
     DamageInnerRadius: number,
     DamageOuterRadius: number,
     DamageFalloff: number,
-    DamageTypeClass: UnrealEngineClassT<any>,
+    DamageTypeClass: UnrealEngineClassT,
     IgnoreActors: Actor[],
     DamageCauser: Actor,
     InstigatedByController: Controller,
@@ -28134,7 +28134,7 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
     BaseDamage: number,
     Origin: Vector,
     DamageRadius: number,
-    DamageTypeClass: UnrealEngineClassT<any>,
+    DamageTypeClass: UnrealEngineClassT,
     IgnoreActors: Actor[],
     DamageCauser: Actor,
     InstigatedByController: Controller,
@@ -28148,14 +28148,14 @@ declare class GameplayStatics mixins BlueprintFunctionLibrary {
     HitInfo: HitResult,
     EventInstigator: Controller,
     DamageCauser: Actor,
-    DamageTypeClass: UnrealEngineClassT<any>
+    DamageTypeClass: UnrealEngineClassT
   ): number;
   static ApplyDamage(
     DamagedActor: Actor,
     BaseDamage: number,
     EventInstigator: Controller,
     DamageCauser: Actor,
-    DamageTypeClass: UnrealEngineClassT<any>
+    DamageTypeClass: UnrealEngineClassT
   ): number;
   static ActivateReverbEffect(
     WorldContextObject: UObject,
@@ -28724,8 +28724,8 @@ declare class Interface_PreviewMeshProvider mixins Interface {
   static C(Other: UObject | any): Interface_PreviewMeshProvider;
 }
 declare class InterpFilter_Classes mixins InterpFilter {
-  ClassToFilterBy: UnrealEngineClassT<any>;
-  TrackClasses: UnrealEngineClassT<any>[];
+  ClassToFilterBy: UnrealEngineClassT;
+  TrackClasses: UnrealEngineClassT[];
   static Load(ResourceName: string): InterpFilter_Classes;
   static Find(Outer: UObject, ResourceName: string): InterpFilter_Classes;
   static GetDefaultObject(): InterpFilter_Classes;
@@ -28751,7 +28751,7 @@ declare class InterpFilter_Custom mixins InterpFilter {
   static C(Other: UObject | any): InterpFilter_Custom;
 }
 declare class CameraPreviewInfo {
-  PawnClass: UnrealEngineClassT<any>;
+  PawnClass: UnrealEngineClassT;
   AnimSeq: AnimSequence;
   Location: Vector;
   Rotation: Rotator;
@@ -29027,8 +29027,8 @@ declare class InterpTrackFade mixins InterpTrackFloatBase {
   static C(Other: UObject | any): InterpTrackFade;
 }
 declare class InterpTrackFloatAnimBPParam mixins InterpTrackFloatBase {
-  AnimBlueprintClass: UnrealEngineClassT<any>;
-  AnimClass: UnrealEngineClassT<any>;
+  AnimBlueprintClass: UnrealEngineClassT;
+  AnimClass: UnrealEngineClassT;
   ParamName: string;
   static Load(ResourceName: string): InterpTrackFloatAnimBPParam;
   static Find(
@@ -29680,7 +29680,7 @@ declare class KismetArrayLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static FilterArray(
     TargetArray: Actor[],
-    FilterClass: UnrealEngineClassT<any>,
+    FilterClass: UnrealEngineClassT,
     FilteredArray?: Actor[]
   ): {
     FilteredArray: Actor[]
@@ -30211,10 +30211,10 @@ declare class KismetMathLibrary mixins BlueprintFunctionLibrary {
     bPickA: boolean
   ): LinearColor;
   static SelectClass(
-    A: UnrealEngineClassT<any>,
-    B: UnrealEngineClassT<any>,
+    A: UnrealEngineClassT,
+    B: UnrealEngineClassT,
     bSelectA: boolean
-  ): UnrealEngineClassT<any>;
+  ): UnrealEngineClassT;
   static SeedRandomStream(
     Stream?: RandomStream
   ): {
@@ -30459,8 +30459,8 @@ declare class KismetMathLibrary mixins BlueprintFunctionLibrary {
   static NotEqual_FloatFloat(A: number, B: number): boolean;
   static NotEqual_DateTimeDateTime(A: DateTime, B: DateTime): boolean;
   static NotEqual_ClassClass(
-    A: UnrealEngineClassT<any>,
-    B: UnrealEngineClassT<any>
+    A: UnrealEngineClassT,
+    B: UnrealEngineClassT
   ): boolean;
   static NotEqual_ByteByte(A: number, B: number): boolean;
   static NotEqual_BoolBool(A: boolean, B: boolean): boolean;
@@ -31056,8 +31056,8 @@ declare class KismetMathLibrary mixins BlueprintFunctionLibrary {
   static EqualEqual_FloatFloat(A: number, B: number): boolean;
   static EqualEqual_DateTimeDateTime(A: DateTime, B: DateTime): boolean;
   static EqualEqual_ClassClass(
-    A: UnrealEngineClassT<any>,
-    B: UnrealEngineClassT<any>
+    A: UnrealEngineClassT,
+    B: UnrealEngineClassT
   ): boolean;
   static EqualEqual_ByteByte(A: number, B: number): boolean;
   static EqualEqual_BoolBool(A: boolean, B: boolean): boolean;
@@ -31162,8 +31162,8 @@ declare class KismetMathLibrary mixins BlueprintFunctionLibrary {
   static ComposeTransforms(A: Transform, B: Transform): Transform;
   static ComposeRotators(A: Rotator, B: Rotator): Rotator;
   static ClassIsChildOf(
-    TestClass: UnrealEngineClassT<any>,
-    ParentClass: UnrealEngineClassT<any>
+    TestClass: UnrealEngineClassT,
+    ParentClass: UnrealEngineClassT
   ): boolean;
   static ClampVectorSize(A: Vector, Min: number, Max: number): Vector;
   static ClampInt64(Value: any, Min: any, Max: any): any;
@@ -31939,7 +31939,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     SpherePos: Vector,
     SphereRadius: number,
     ObjectTypes: EObjectTypeQueryT[],
-    ComponentClassFilter: UnrealEngineClassT<any>,
+    ComponentClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutComponents?: PrimitiveComponent[]
   ): {
@@ -31951,7 +31951,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     SpherePos: Vector,
     SphereRadius: number,
     ObjectTypes: EObjectTypeQueryT[],
-    ActorClassFilter: UnrealEngineClassT<any>,
+    ActorClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutActors?: Actor[]
   ): {
@@ -32049,7 +32049,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
   static SetClassPropertyByName(
     UObject: UObject,
     PropertyName: string,
-    Value: UnrealEngineClassT<any>
+    Value: UnrealEngineClassT
   ): void;
   static SetBytePropertyByName(
     UObject: UObject,
@@ -32291,7 +32291,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
   static IsValidSoftClassReference(SoftClassReference: Class<any>): boolean;
   static IsValidPrimaryAssetType(PrimaryAssetType: PrimaryAssetType): boolean;
   static IsValidPrimaryAssetId(PrimaryAssetId: PrimaryAssetId): boolean;
-  static IsValidClass(Class: UnrealEngineClassT<any>): boolean;
+  static IsValidClass(Class: UnrealEngineClassT): boolean;
   static IsValid(UObject: UObject): boolean;
   static IsUnattended(): boolean;
   static IsStandalone(WorldContextObject: UObject): boolean;
@@ -32346,7 +32346,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
   ): PrimaryAssetId;
   static GetPrimaryAssetIdFromObject(UObject: UObject): PrimaryAssetId;
   static GetPrimaryAssetIdFromClass(
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): PrimaryAssetId;
   static GetPreferredLanguages(): string[];
   static GetPlatformUserName(): string;
@@ -32397,12 +32397,12 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
   static GetCommandLine(): string;
   static GetClassFromPrimaryAssetId(
     PrimaryAssetId: PrimaryAssetId
-  ): UnrealEngineClassT<any>;
-  static GetClassDisplayName(Class: UnrealEngineClassT<any>): string;
+  ): UnrealEngineClassT;
+  static GetClassDisplayName(Class: UnrealEngineClassT): string;
   static GetAdIDCount(): number;
   static GetActorListFromComponentList(
     ComponentList: PrimitiveComponent[],
-    ActorClassFilter: UnrealEngineClassT<any>,
+    ActorClassFilter: UnrealEngineClassT,
     OutActorList?: Actor[]
   ): {
     OutActorList: Actor[]
@@ -32586,7 +32586,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static DoesImplementInterface(
     TestObject: UObject,
-    Interface: UnrealEngineClassT<any>
+    Interface: UnrealEngineClassT
   ): boolean;
   static Delay(
     WorldContextObject: UObject,
@@ -32604,21 +32604,21 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
   ): string;
   static Conv_SoftClassReferenceToClass(
     softclass: Class<any>
-  ): UnrealEngineClassT<any>;
+  ): UnrealEngineClassT;
   static Conv_PrimaryAssetTypeToString(
     PrimaryAssetType: PrimaryAssetType
   ): string;
   static Conv_PrimaryAssetIdToString(PrimaryAssetId: PrimaryAssetId): string;
   static Conv_ObjectToSoftObjectReference(UObject: UObject): UObject;
   static Conv_ClassToSoftClassReference(
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): Class<any>;
   static ControlScreensaver(bAllowScreenSaver: boolean): void;
   static ComponentOverlapComponents(
     Component: PrimitiveComponent,
     ComponentTransform: Transform,
     ObjectTypes: EObjectTypeQueryT[],
-    ComponentClassFilter: UnrealEngineClassT<any>,
+    ComponentClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutComponents?: PrimitiveComponent[]
   ): {
@@ -32629,7 +32629,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     Component: PrimitiveComponent,
     ComponentTransform: Transform,
     ObjectTypes: EObjectTypeQueryT[],
-    ActorClassFilter: UnrealEngineClassT<any>,
+    ActorClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutActors?: Actor[]
   ): {
@@ -32757,7 +32757,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     Radius: number,
     HalfHeight: number,
     ObjectTypes: EObjectTypeQueryT[],
-    ComponentClassFilter: UnrealEngineClassT<any>,
+    ComponentClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutComponents?: PrimitiveComponent[]
   ): {
@@ -32770,7 +32770,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     Radius: number,
     HalfHeight: number,
     ObjectTypes: EObjectTypeQueryT[],
-    ActorClassFilter: UnrealEngineClassT<any>,
+    ActorClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutActors?: Actor[]
   ): {
@@ -32910,7 +32910,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     BoxPos: Vector,
     Extent: Vector,
     ObjectTypes: EObjectTypeQueryT[],
-    ComponentClassFilter: UnrealEngineClassT<any>,
+    ComponentClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutComponents?: PrimitiveComponent[]
   ): {
@@ -32922,7 +32922,7 @@ declare class KismetSystemLibrary mixins BlueprintFunctionLibrary {
     BoxPos: Vector,
     BoxExtent: Vector,
     ObjectTypes: EObjectTypeQueryT[],
-    ActorClassFilter: UnrealEngineClassT<any>,
+    ActorClassFilter: UnrealEngineClassT,
     ActorsToIgnore: Actor[],
     OutActors?: Actor[]
   ): {

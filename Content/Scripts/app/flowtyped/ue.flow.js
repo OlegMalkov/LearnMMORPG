@@ -3667,7 +3667,7 @@ declare class Note mixins Actor {
   static C(Other: UObject | any): Note;
 }
 declare class ObjectLibrary mixins UObject {
-  ObjectBaseClass: UnrealEngineClassT<any>;
+  ObjectBaseClass: UnrealEngineClassT;
   bHasBlueprintClasses: boolean;
   Objects: UObject[];
   WeakObjects: any[];
@@ -3740,7 +3740,7 @@ declare class PackageMapClient mixins PackageMap {
 declare class PainCausingVolume mixins PhysicsVolume {
   bPainCausing: boolean;
   DamagePerSec: number;
-  DamageType: UnrealEngineClassT<any>;
+  DamageType: UnrealEngineClassT;
   PainInterval: number;
   bEntryPain: boolean;
   BACKUP_bPainCausing: boolean;
@@ -8113,17 +8113,17 @@ declare class SubsystemBlueprintLibrary mixins BlueprintFunctionLibrary {
   ): SubsystemBlueprintLibrary;
   static GetLocalPlayerSubSystemFromPlayerController(
     PlayerController: PlayerController,
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): LocalPlayerSubsystem;
   static GetLocalPlayerSubsystem(
     ContextObject: UObject,
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): LocalPlayerSubsystem;
   static GetGameInstanceSubsystem(
     ContextObject: UObject,
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): GameInstanceSubsystem;
-  static GetEngineSubsystem(Class: UnrealEngineClassT<any>): EngineSubsystem;
+  static GetEngineSubsystem(Class: UnrealEngineClassT): EngineSubsystem;
   static C(Other: UObject | any): SubsystemBlueprintLibrary;
 }
 declare class SystemTimeTimecodeProvider mixins TimecodeProvider {
@@ -8424,7 +8424,7 @@ declare class UserInterfaceSettings mixins DeveloperSettings {
   bAllowHighDPIInGameMode: boolean;
   bLoadWidgetsOnDedicatedServer: boolean;
   CursorClasses: UObject[];
-  CustomScalingRuleClassInstance: UnrealEngineClassT<any>;
+  CustomScalingRuleClassInstance: UnrealEngineClassT;
   CustomScalingRule: DPICustomScalingRule;
   static Load(ResourceName: string): UserInterfaceSettings;
   static Find(Outer: UObject, ResourceName: string): UserInterfaceSettings;
@@ -9082,7 +9082,7 @@ declare class AnimationBlueprintLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static RemoveMetaDataOfClass(
     AnimationSequence: AnimSequence,
-    MetaDataClass: UnrealEngineClassT<any>
+    MetaDataClass: UnrealEngineClassT
   ): void;
   static RemoveMetaData(
     AnimationSequence: AnimSequence,
@@ -9235,7 +9235,7 @@ declare class AnimationBlueprintLibrary mixins BlueprintFunctionLibrary {
   };
   static GetMetaDataOfClass(
     AnimationSequence: AnimSequence,
-    MetaDataClass: UnrealEngineClassT<any>,
+    MetaDataClass: UnrealEngineClassT,
     MetaDataOfClass: AnimMetaData[]
   ): void;
   static GetMetaData(
@@ -9391,7 +9391,7 @@ declare class AnimationBlueprintLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static ContainsMetaDataOfClass(
     AnimationSequence: AnimSequence,
-    MetaDataClass: UnrealEngineClassT<any>
+    MetaDataClass: UnrealEngineClassT
   ): boolean;
   static AddVirtualBone(
     AnimationSequence: AnimSequence,
@@ -9431,7 +9431,7 @@ declare class AnimationBlueprintLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static AddMetaData(
     AnimationSequence: AnimSequence,
-    MetaDataClass: UnrealEngineClassT<any>,
+    MetaDataClass: UnrealEngineClassT,
     MetaDataInstance: AnimMetaData
   ): void;
   static AddFloatCurveKeys(
@@ -9474,7 +9474,7 @@ declare class AnimationBlueprintLibrary mixins BlueprintFunctionLibrary {
     NotifyTrackName: string,
     StartTime: number,
     Duration: number,
-    NotifyClass: UnrealEngineClassT<any>
+    NotifyClass: UnrealEngineClassT
   ): AnimNotify;
   static C(Other: UObject | any): AnimationBlueprintLibrary;
 }
@@ -10008,7 +10008,7 @@ declare class DatasmithContentBlueprintLibrary mixins BlueprintFunctionLibrary {
   static GetDatasmithUserData(UObject: UObject): DatasmithAssetUserData;
   static GetAllObjectsAndValuesForKey(
     Key: string,
-    ObjectClass: UnrealEngineClassT<any>,
+    ObjectClass: UnrealEngineClassT,
     OutObjects?: UObject[],
     OutValues?: string[]
   ): {
@@ -10016,7 +10016,7 @@ declare class DatasmithContentBlueprintLibrary mixins BlueprintFunctionLibrary {
     OutValues: string[]
   };
   static GetAllDatasmithUserData(
-    ObjectClass: UnrealEngineClassT<any>,
+    ObjectClass: UnrealEngineClassT,
     OutUserData?: DatasmithAssetUserData[]
   ): {
     OutUserData: DatasmithAssetUserData[]
@@ -11835,7 +11835,7 @@ declare class OnlineBeacon mixins Actor {
 }
 declare class OnlineBeaconHostObject mixins Actor {
   BeaconTypeName: string;
-  ClientBeaconActorClass: UnrealEngineClassT<any>;
+  ClientBeaconActorClass: UnrealEngineClassT;
   ClientActors: OnlineBeaconClient[];
   static GetDefaultObject(): OnlineBeaconHostObject;
   static CreateDefaultSubobject(
@@ -13296,7 +13296,7 @@ declare class PerPlatformBool {
 }
 declare class AnimationSetup {
   AnimSequence: AnimSequence;
-  AnimBlueprint: UnrealEngineClassT<any>;
+  AnimBlueprint: UnrealEngineClassT;
   NumRandomizedInstances: PerPlatformInt;
   Enabled: PerPlatformBool;
   clone(): AnimationSetup;
@@ -13320,9 +13320,9 @@ declare class AnimationStateEntry {
 declare class PerSkeletonAnimationSharingSetup {
   Skeleton: Skeleton;
   SkeletalMesh: SkeletalMesh;
-  BlendAnimBlueprint: UnrealEngineClassT<any>;
-  AdditiveAnimBlueprint: UnrealEngineClassT<any>;
-  StateProcessorClass: UnrealEngineClassT<any>;
+  BlendAnimBlueprint: UnrealEngineClassT;
+  AdditiveAnimBlueprint: UnrealEngineClassT;
+  StateProcessorClass: UnrealEngineClassT;
   AnimationStates: AnimationStateEntry[];
   clone(): PerSkeletonAnimationSharingSetup;
   static C(Other: UObject | any): PerSkeletonAnimationSharingSetup;
@@ -14479,7 +14479,7 @@ declare class JavascriptAsset {
 }
 declare class JavascriptClassAsset {
   Name: string;
-  Class: UnrealEngineClassT<any>;
+  Class: UnrealEngineClassT;
   clone(): JavascriptClassAsset;
   static C(Other: UObject | any): JavascriptClassAsset;
 }
@@ -14503,7 +14503,7 @@ declare class JavascriptComponent mixins ActorComponent {
     Required?: boolean,
     Abstract?: boolean
   ): JavascriptComponent;
-  ResolveClass(Name: string): UnrealEngineClassT<any>;
+  ResolveClass(Name: string): UnrealEngineClassT;
   ResolveAsset(Name: string, bTryLoad: boolean): UObject;
   Invoke(Name: string): void;
   ForceGC(): void;
@@ -15071,7 +15071,7 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
   static IsPlayInPreview(World: World): boolean;
   static IsPlayInEditor(World: World): boolean;
   static IsPendingKill(InActor: Actor): boolean;
-  static IsGeneratedByBlueprint(InClass: UnrealEngineClassT<any>): boolean;
+  static IsGeneratedByBlueprint(InClass: UnrealEngineClassT): boolean;
   static IsGameWorld(World: World): boolean;
   static IsAsyncLoadComplete(
     Manager: JavascriptStreamableManager,
@@ -15088,8 +15088,8 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
   };
   static GetWorldBounds(InWorld: World): Box;
   static GetSuperClasses(
-    InClass: UnrealEngineClassT<any>
-  ): UnrealEngineClassT<any>[];
+    InClass: UnrealEngineClassT
+  ): UnrealEngineClassT[];
   static GetStructProperties(
     StructName: string,
     bIncludeSuper: boolean
@@ -15109,7 +15109,7 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
     Results: UObject[]
   };
   static GetObjectsOfClass(
-    ClassToLookFor: UnrealEngineClassT<any>,
+    ClassToLookFor: UnrealEngineClassT,
     Results?: UObject[],
     bIncludeDerivedClasses?: boolean,
     ExcludeFlags?: number,
@@ -15132,12 +15132,12 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
   static GetFileSize(UObject: UObject, Filename: string): number;
   static GetFields(UObject: UObject, bIncludeSuper: boolean): Field[];
   static GetDynamicBinding(
-    Outer: UnrealEngineClassT<any>,
-    BindingObjectClass: UnrealEngineClassT<any>
+    Outer: UnrealEngineClassT,
+    BindingObjectClass: UnrealEngineClassT
   ): DynamicBlueprintBinding;
   static GetDir(UObject: UObject, WhichDir: string): string;
   static GetDerivedClasses(
-    ClassToLookFor: UnrealEngineClassT<any>,
+    ClassToLookFor: UnrealEngineClassT,
     Results?: UnrealEngineClassT[],
     bRecursive?: boolean
   ): {
@@ -15157,7 +15157,7 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
   ): string;
   static GetCurrentProcessId(): number;
   static GetColumnNumber(UNode: JavascriptProfileNode): number;
-  static GetClassPathName(Class: UnrealEngineClassT<any>): string;
+  static GetClassPathName(Class: UnrealEngineClassT): string;
   static GetChildrenCount(UNode: JavascriptProfileNode): number;
   static GetChild(
     UNode: JavascriptProfileNode,
@@ -15167,15 +15167,15 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
   static GetCallUid(UNode: JavascriptProfileNode): number;
   static GetBlueprintGeneratedClassFromPath(
     Path: string
-  ): UnrealEngineClassT<any>;
+  ): UnrealEngineClassT;
   static GetBlueprintGeneratedClass(
     Blueprint: Blueprint
-  ): UnrealEngineClassT<any>;
+  ): UnrealEngineClassT;
   static GetBailoutReason(UNode: JavascriptProfileNode): string;
   static GetArchetypePathName(UObject: UObject): string;
   static GetAllActorsOfClassAndTags(
     WorldContextObject: UObject,
-    ActorClass: UnrealEngineClassT<any>,
+    ActorClass: UnrealEngineClassT,
     Tags_Accept: string[],
     Tags_Deny: string[],
     OutActors?: Actor[]
@@ -15186,7 +15186,7 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
   static FindPackage(InOuter: UObject, PackageName: string): Package;
   static FindObjectWithOuter(
     Outer: UObject,
-    ClassToLookFor: UnrealEngineClassT<any>,
+    ClassToLookFor: UnrealEngineClassT,
     NameToLookFor: string
   ): UObject;
   static FileExists(Filename: string): boolean;
@@ -15234,7 +15234,7 @@ declare class JavascriptLibrary mixins BlueprintFunctionLibrary {
     InStatOperation: EJavascriptStatOperationT
   ): void;
   static AddDynamicBinding(
-    Outer: UnrealEngineClassT<any>,
+    Outer: UnrealEngineClassT,
     BindingObject: DynamicBlueprintBinding
   ): void;
   static Actor_GetWorld(Actor: Actor): World;
@@ -15591,7 +15591,7 @@ declare class JavascriptGameViewport mixins ContentWidget {
     Required?: boolean,
     Abstract?: boolean
   ): JavascriptGameViewport;
-  Spawn(ActorClass: UnrealEngineClassT<any>): Actor;
+  Spawn(ActorClass: UnrealEngineClassT): Actor;
   SetViewRotation(Rotation: Rotator): void;
   SetViewLocation(Location: Vector): void;
   GetViewRotation(): Rotator;
@@ -17163,7 +17163,7 @@ declare class VehicleWheel mixins UObject {
   static C(Other: UObject | any): VehicleWheel;
 }
 declare class WheelSetup {
-  WheelClass: UnrealEngineClassT<any>;
+  WheelClass: UnrealEngineClassT;
   BoneName: string;
   AdditionalOffset: Vector;
   bDisableSteering: boolean;
@@ -19420,7 +19420,7 @@ declare class PropertyValue mixins UObject {
   PropertySetterName: string;
   PropertySetterParameterDefaults: any;
   bHasRecordedData: boolean;
-  LeafPropertyClass: UnrealEngineClassT<any>;
+  LeafPropertyClass: UnrealEngineClassT;
   ValueBytes: number[];
   PropCategory: EPropertyValueCategoryT;
   static Load(ResourceName: string): PropertyValue;
@@ -19500,7 +19500,7 @@ declare class VariantSet mixins UObject {
 }
 declare class LevelVariantSets mixins UObject {
   DirectorBlueprint: UObject;
-  DirectorClass: UnrealEngineClassT<any>;
+  DirectorClass: UnrealEngineClassT;
   VariantSets: VariantSet[];
   static Load(ResourceName: string): LevelVariantSets;
   static Find(Outer: UObject, ResourceName: string): LevelVariantSets;
@@ -22721,7 +22721,7 @@ declare class LandscapeEditorObject mixins UObject {
   MirrorPoint: Vector2D;
   MirrorOp: ELandscapeMirrorOperationT;
   MirrorSmoothingWidth: number;
-  BlueprintCustomBrush: UnrealEngineClassT<any>;
+  BlueprintCustomBrush: UnrealEngineClassT;
   ResizeLandscape_QuadsPerSection: number;
   ResizeLandscape_SectionsPerComponent: number;
   ResizeLandscape_ComponentCount: IntPoint;
@@ -22899,7 +22899,7 @@ declare class JavascriptAssetEditorToolkit mixins UObject {
 declare class JavascriptAssetTypeActions mixins UObject {
   ActionsName: string;
   Color: Color;
-  SupportedClass: UnrealEngineClassT<any>;
+  SupportedClass: UnrealEngineClassT;
   Editor: JavascriptAssetEditorToolkit;
   Actions: JavascriptUIExtender;
   static Load(ResourceName: string): JavascriptAssetTypeActions;
@@ -22994,7 +22994,7 @@ declare class JavascriptEditorEngineLibrary mixins BlueprintFunctionLibrary {
   };
   static GetSelectedSet(
     Engine: EditorEngine,
-    Class: UnrealEngineClassT<any>
+    Class: UnrealEngineClassT
   ): USelection;
   static GetSelectedObjects(Engine: EditorEngine): USelection;
   static GetSelectedComponents(Engine: EditorEngine): USelection;
@@ -23003,7 +23003,7 @@ declare class JavascriptEditorEngineLibrary mixins BlueprintFunctionLibrary {
   static GetEditorWorld(Engine: Engine): World;
   static FindBrushBuilder(
     Engine: EditorEngine,
-    BrushBuilderClass: UnrealEngineClassT<any>
+    BrushBuilderClass: UnrealEngineClassT
   ): BrushBuilder;
   static Exec(
     Engine: EditorEngine,
@@ -23057,7 +23057,7 @@ declare class JavascriptAssetData {
     OutArray: string[]
   };
   GetAsset(): UObject;
-  GetClass(): UnrealEngineClassT<any>;
+  GetClass(): UnrealEngineClassT;
   GetPackage(): Package;
   GetTagValue(
     Name: string,
@@ -23074,7 +23074,7 @@ declare class JavascriptAssetData {
     OutArray: string[]
   };
   static GetAsset(AssetData: JavascriptAssetData): UObject;
-  static GetClass(AssetData: JavascriptAssetData): UnrealEngineClassT<any>;
+  static GetClass(AssetData: JavascriptAssetData): UnrealEngineClassT;
   static GetPackage(AssetData: JavascriptAssetData): Package;
   static GetTagValue(
     AssetData: JavascriptAssetData,
@@ -23133,7 +23133,7 @@ declare class JavascriptEditorGlobalDelegates mixins UObject {
   OnInMemoryAssetCreated(InObject: UObject): void;
   OnGridSnappingChanged(bGridEnabled: boolean, GridSize: number): void;
   OnFocusViewportOnActors(Actors: Actor[]): void;
-  OnFinishPickingBlueprintClass(InClass: UnrealEngineClassT<any>): void;
+  OnFinishPickingBlueprintClass(InClass: UnrealEngineClassT): void;
   OnFilesLoaded(): void;
   OnFileLoadProgressUpdated_Friendly(
     NumTotalAssets: number,
@@ -23160,7 +23160,7 @@ declare class JavascriptEditorGlobalDelegates mixins UObject {
   OnAssetReimport(InCreatedObject: UObject): void;
   OnAssetPreImport_Friendly(
     InFactory: Factory,
-    InClass: UnrealEngineClassT<any>,
+    InClass: UnrealEngineClassT,
     InParent: UObject,
     Name: string,
     Type: string
@@ -23868,7 +23868,7 @@ declare class JavascriptEditorLibrary mixins BlueprintFunctionLibrary {
   static GetPrimaryObject(Transaction: JavascriptTransaction): UObject;
   static GetParentClassOfBlueprint(
     Blueprint: Blueprint
-  ): UnrealEngineClassT<any>;
+  ): UnrealEngineClassT;
   static GetPackage(AssetData: JavascriptAssetData): Package;
   static GetOrigin(Click: JavascriptViewportClick): Vector;
   static GetName(Proxy: JavascriptHitProxy): string;
@@ -23919,7 +23919,7 @@ declare class JavascriptEditorLibrary mixins BlueprintFunctionLibrary {
   ): string;
   static GetContext(Transaction: JavascriptTransaction): string;
   static GetClickPos(Click: JavascriptViewportClick): IntPoint;
-  static GetClass(AssetData: JavascriptAssetData): UnrealEngineClassT<any>;
+  static GetClass(AssetData: JavascriptAssetData): UnrealEngineClassT;
   static GetAssetsByType(
     Types: string[],
     bRecursiveClasses: boolean
@@ -24168,7 +24168,7 @@ declare class JavascriptEditorLibrary mixins BlueprintFunctionLibrary {
   ): void;
   static DeselectAll(
     USelection: USelection,
-    InClass: UnrealEngineClassT<any>
+    InClass: UnrealEngineClassT
   ): void;
   static Deselect(USelection: USelection, InObject: UObject): void;
   static DeletePackage(Package: Package): boolean;
@@ -25505,7 +25505,7 @@ declare class ActorActionUtility mixins GlobalEditorUtilityBase {
     Required?: boolean,
     Abstract?: boolean
   ): ActorActionUtility;
-  GetSupportedClass(): UnrealEngineClassT<any>;
+  GetSupportedClass(): UnrealEngineClassT;
   static C(Other: UObject | any): ActorActionUtility;
 }
 declare class AssetActionUtility mixins GlobalEditorUtilityBase {
@@ -25518,7 +25518,7 @@ declare class AssetActionUtility mixins GlobalEditorUtilityBase {
     Required?: boolean,
     Abstract?: boolean
   ): AssetActionUtility;
-  GetSupportedClass(): UnrealEngineClassT<any>;
+  GetSupportedClass(): UnrealEngineClassT;
   static C(Other: UObject | any): AssetActionUtility;
 }
 declare class EditorAutomationActor mixins Actor {
@@ -25571,7 +25571,7 @@ declare class EditorUtilityBlueprint mixins Blueprint {
   static C(Other: UObject | any): EditorUtilityBlueprint;
 }
 declare class EditorUtilityBlueprintFactory mixins Factory {
-  ParentClass: UnrealEngineClassT<any>;
+  ParentClass: UnrealEngineClassT;
   static Load(ResourceName: string): EditorUtilityBlueprintFactory;
   static Find(
     Outer: UObject,
@@ -25657,7 +25657,7 @@ declare class EditorUtilityWidgetBlueprint mixins WidgetBlueprint {
 }
 declare class EditorUtilityWidgetBlueprintFactory mixins Factory {
   BlueprintType: EBlueprintTypeT;
-  ParentClass: UnrealEngineClassT<any>;
+  ParentClass: UnrealEngineClassT;
   static Load(ResourceName: string): EditorUtilityWidgetBlueprintFactory;
   static Find(
     Outer: UObject,
@@ -25725,7 +25725,7 @@ declare var EMeshInstancingReplacementMethod: {
   EMeshInstancingReplacementMethod_MAX: "EMeshInstancingReplacementMethod_MAX"
 };
 declare class MeshInstancingSettings {
-  ActorClassToUse: UnrealEngineClassT<any>;
+  ActorClassToUse: UnrealEngineClassT;
   InstanceReplacementThreshold: number;
   MeshReplacementMethod: EMeshInstancingReplacementMethodT;
   bSkipMeshesWithVertexColors: boolean;
