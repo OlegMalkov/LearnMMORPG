@@ -1,5 +1,7 @@
 // @flow strict
 import { createEffectManager, makeEvent } from './epicsFlow'
+import { merge } from 'diff/lib/patch/merge'
+import { type MsgToUnrealJsType, type BrowserAppStateType } from './webBrowser/webBrowser'
 
 type TextActorStateType = {| text: string |}
 
@@ -68,9 +70,21 @@ const initBrowserScope = ({ scriptFilePath }): WebBrowserScopeType => {
 		setContentTimeoutId: setTimeout(() => {
 			webBrowserScope.widget.chromium_instance.OnUrlChanged = (url) => {
 				try {
-					const msg = JSON.parse(decodeURIComponent(url.substring(url.indexOf('#') + 1)))
+					const msg: MsgToUnrealJsType = JSON.parse(decodeURIComponent(url.substring(url.indexOf('#') + 1)))
 
 					console.log('msg received', msg)
+					switch (msg.type) {
+					case 'INITIAL_STATE':
+						console.log('initial state')
+						break
+					case 'STATE_UPDATED':
+						console.log('STATE_UPDATE')
+						break
+					default:
+						// eslint-disable-next-line no-unused-expressions
+						(msg: empty)
+						break
+					}
 				} catch (e) {
 					console.log('failed to decode msg', e)
 				}

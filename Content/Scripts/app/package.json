@@ -26,5 +26,8 @@
     "post-compile-webpack-plugin": "^0.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1"
+  },
+  "dependencies": {
+    "react": "^16.8.6"
   }
 }

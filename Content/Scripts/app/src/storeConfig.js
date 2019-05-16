@@ -15,7 +15,10 @@ import {
 	updateTextActorEC,
 	bootBrowserEC,
 } from './actorsEM'
-import './browser/browser'
+
+try {
+	require('./webBrowser/webBrowser')
+} catch (e) { /* ok */ }
 
 const IncEvent = makeSimpleCommand('INC')
 
@@ -29,7 +32,7 @@ const storeConfig: CreateStorePropsType<*> = {
 					given: {},
 					when: { inc: storeCreatedEvent.condition },
 					then: ({R}) => R
-						.sideEffect(bootBrowserEC('./app/src/browser/browser.dist.js'))
+						.sideEffect(bootBrowserEC('./app/src/browser/webBrowser.dist.js'))
 						.sideEffect(queryWorldActorsEC())
 						.sideEffect(createTextActorEC({ actorId: 'text1', text: 'initialized' })),
 				}),

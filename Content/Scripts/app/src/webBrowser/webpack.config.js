@@ -16,9 +16,9 @@ module.exports = {
 			},
 		],
 	},
-	entry: './browser.js',
+	entry: './webBrowser.js',
 	output: {
-		filename: 'browser.dist.js',
+		filename: 'webBrowser.dist.js',
 		// eslint-disable-next-line no-undef
 		path: path.resolve(__dirname),
 	},
